@@ -1,0 +1,6 @@
+package config
+
+type source struct {
+	url  string "SOURCE_URL",
+	cols int    10
+}
