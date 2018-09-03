@@ -10,8 +10,8 @@ import (
 //		- KEY : the key of the sheet
 //		- SHEET_INDEX : index of the sheet
 type Config struct {
-	URL  string
-	Cols int
+	URL     string
+	ColKeys []string
 }
 
 //PATH - Path of the config
