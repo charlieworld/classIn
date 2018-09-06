@@ -107,6 +107,17 @@
     bottom: 0px;
     width: 100vw;
   }
+  .loading {
+    position: fixed;
+    font-size: 2rem;
+    color: #EB9F9F;
+    background-color: RGB(255,255,255,0.3);
+    width: 100vw;
+    height: 100vh;
+    z-index: 101;
+    text-align: center;
+    line-height: 97vh;
+  }
 
 </style>
 
@@ -157,7 +168,7 @@
           </el-row>
         </div>
         <el-main>
-          <div style="margin-top:210px;">
+          <div v-if="!loading" style="margin-top:210px;">
             <template v-for="item of mainData.Data">
               <el-row class="card card_bar">
                 <el-col :span="3">
@@ -207,6 +218,9 @@
         <el-footer class="footer" height=40>
             2018 weiliewonka 
         </el-footer>
+        <div v-if="loading" class="loading">
+            <i class="fas fa-circle-notch fa-spin 7x loading-icon"></i>
+        </div>
     </el-container>
   </div> <!-- app -->
 <script>
@@ -214,13 +228,9 @@
     el: '#app',
     data: function () {
       return { 
-        visible: false,
-        liveTitle: ' -- ',
-        mainTitle: '',
-        input: '',
-        def_padding: {span:16,offset:4},
         mainData: {},
         searchVal: '',
+        loading: true,
         filters: [
           {title: '最新評價', val: '最新評價'},
           {title: '人文通識評價', val: '人文通識評價'},
@@ -244,34 +254,7 @@
       this.geData();
     },
     methods: {
-      submit(txt){
-        axios({
-          method: 'post',
-          url: '/title',
-          headers: {
-            'Content-Type': 'application/json'
-          },
-          data: {
-            title: txt,
-          }
-        })
-        .then((response) => {
-          this.liveTitle = response.data.title
-          this.$message({
-            showClose: true,
-            message: `設定標題為 : ${response.data.title}`,
-            type: 'success'
-          })
-        })
-        .catch((error) => {
-          this.$message({
-            message: error,
-            type: 'error'
-          })
-        });
-      },
       geData() {
-
         //https://spreadsheets.google.com/feeds/cells/1YTB-i8QK7tx53am4uqycHVKLy1EUhfOBNYG-1GXjSRI/2/public/values?alt=json
         axios({
           method: 'get',
@@ -284,6 +267,7 @@
             showClose: true,
             message: '讀取資料成功！',
           })
+          this.loading = false
         })
         .catch((error) => {
           console.error(error)
@@ -292,34 +276,8 @@
             type: 'error'
           })
         });
-      },
-      handleData (rows, data) {
-        let output = {
-          headers:[],
-          data:[]
-        }
-        for (let i=0 ; i < rows ; i++) {
-          let temp = data.shift();
-          output.headers.push(temp['gs$cell']['$t'])
-        }
-        let temp = {};
-        let rowNm = data[0]['gs$cell']['row'];
-
-        for (const item of data) {
-          if ( item['gs$cell']['row'] === rowNm ) {
-            temp['item'+item['gs$cell']['col']] = item['gs$cell']['$t']
-          } else {
-            output.data.push(temp);
-            temp = {};
-            rowNm = item['gs$cell']['row'];
-            temp['item'+item['gs$cell']['col']] = item['gs$cell']['$t']
-          }
-          
-        }
-        return output
       }
     }
-    
   })
 </script>
 </body>
