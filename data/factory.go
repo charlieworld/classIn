@@ -13,8 +13,8 @@ import (
 
 //dataPack - the output object
 type dataPack struct {
-	Headers []interface{}
-	Data    []interface{}
+	Header interface{}
+	Data   []interface{}
 }
 
 func main() {
@@ -57,15 +57,17 @@ func main() {
 //reFormatData - Reformating data
 func reFormatData(keys []string, data []interface{}) dataPack {
 	var output dataPack
-
+	o := make(map[string]interface{})
 	for i := 0; i < len(keys); i++ {
 		t := data[0]
 		data = data[1:]
-
 		head, _ := t.(map[string]interface{})
 		head, _ = head["gs$cell"].(map[string]interface{})
-		output.Headers = append(output.Headers, head["$t"])
+		keyName := keys[i]
+		o[keyName] = head["$t"]
 	}
+	output.Header = o
+
 	temp := make(map[string]interface{})
 	n, _ := data[0].(map[string]interface{})
 	n, _ = n["gs$cell"].(map[string]interface{})

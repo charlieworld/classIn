@@ -20,7 +20,7 @@ classIn的網站就是使用這份資料
 
 資料連結：[data.json](https://classin.info/data/data.json)
 
-### 原始 Google Spreadsheet資料
+### 原始Google Spreadsheet資料
 
 你也可以直接看[原始表單回應資料](https://docs.google.com/spreadsheets/d/1aKaEzOVSxhggU_ydTTvlxGID_rkBPIbS9_WZrQVREpo)
 

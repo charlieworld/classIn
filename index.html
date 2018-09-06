@@ -1,0 +1,326 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8"/>
+<title>ClassIn | 專屬輔大人的修課經驗交流平台</title>
+<meta name="description" content="專屬輔大學生的修課評價網站，來看看學長姐們對於不同課程的評價、也分享你這學期所修的課吧！">
+<meta name="author" content="ClassIn"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+<link rel="shortcut icon" href="" />
+<!-- production version, optimized for size and speed -->
+<script src="https://cdn.jsdelivr.net/npm/vue"></script>
+<!-- axios -->
+<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+<!-- element ui -->
+<link rel="stylesheet" href="./asset/theme/index.css">
+<script src="https://unpkg.com/element-ui/lib/index.js"></script>
+<!-- icon Front -->
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous">
+</head>
+
+<style>
+  html, body{
+    padding: 0;
+    margin: 0;
+    font-family: Arial, Helvetica, sans-serif;
+  }
+  .head{
+    background-color: #EB9F9F;
+    color: #FFFFFF;
+    font-size: 2rem;
+    font-weight: 200;
+  }
+  .tags{
+    font-size: 1.1rem;
+  }
+  .c-full{
+    width: 100%;
+  }
+
+  .filter_bar{
+    background-color: #FFFFFF;
+    border-bottom: RGB(0,0,0,0.12) solid 1px;
+    padding:10px 10px;
+  }
+  .order_bar_br{
+    background-color: #FFFFFF;
+    padding:10px 0px;
+  }
+  .order_bar{
+    width: 80%;
+    left: 10%;
+    margin: 0px 0px;
+  }
+
+  .c-btn-head{
+    background-color: transparent;
+    border: #FFFFFF solid 1px;
+    color: #FFFFFF;
+  }
+
+  .c-btn-head-active {
+    color:#EB9F9F
+  }
+
+  .c-btn-head:hover, .c-btn-head-active:hover {
+    border: #EB9F9F solid 1px;
+    background-color: #FFFFFF;
+    color: #EB9F9F;
+  }
+
+  .c-btn {
+    border: #EB9F9F solid 1px;
+    background-color: #FFFFFF;
+    color: #EB9F9F;
+  }
+
+  .el-input__inner, .el-input-group__append{
+    border: #EB9F9F solid 1px;
+    color: #EB9F9F;
+  }
+
+  .card_bar {
+    width: 70%;
+    left: 15%;
+    margin: 0px 0px;
+  }
+
+  .card {
+    border-bottom: RGB(0,0,0,0.12) solid 1px;
+  }
+  .heart-margn{
+    margin-right: 0.5rem; 
+  }
+
+  .fixed{
+    width: 100vw;
+    position: fixed;
+    z-index:100;
+  }
+  .footer {
+    background-color:#F8ECC9;
+    text-align: center;
+    line-height: 40px;
+    color: #A79C8E;
+    position: fixed;
+    bottom: 0px;
+    width: 100vw;
+  }
+
+</style>
+
+<body>
+  <div id="app">
+    <el-container>
+        <el-header class="head fixed">
+            <el-row :gutter="20">
+              <el-col :span="12" style="line-height: 60px;">輔大選課資訊交流平台</el-col>
+              <el-col :span="3" :offset="6">
+                <el-button plain round 
+                  style="
+                    margin-top:10px;
+                    background-color:FFFFFF;
+                    border: #FFFFFF solid 1px;
+                    color: #EB9F9F;"
+                  class="c-full">查看評價</el-button></el-col>
+              <el-col :span="3">
+                <el-button plain round 
+                style="
+                  margin-top:10px; 
+                  background-color: transparent;
+                  border: #FFFFFF solid 1px;
+                  color: #FFFFFF;" 
+                class="c-full">新增評價</el-button></el-col>
+            </el-row>
+        </el-header>
+        <div class="fixed" style="top:60px;">
+          <el-row :gutter="20" class="filter_bar" >
+            <template v-for="item of filters">
+                <el-col :span="3"><el-button plain class="c-full c-btn" size="medium">{{item.title}}</el-button></el-col>
+            </template>
+            <el-col :span="6">
+              <el-input placeholder="请输入内容" v-model="searchVal" class="input-with-select c-full">
+                <el-button slot="append" icon="el-icon-search"></el-button>
+              </el-input>                
+            </el-col>
+          </el-row>
+        </div>
+        <div class="order_bar_br fixed" style="top:121px;">
+          <el-row :gutter="10" class="order_bar">
+            <el-col :span="3" style="line-height:35px;text-align: right;font-size: 14px;">
+                排序依照：               
+            </el-col>
+            <template v-for="item of orders">
+                <el-col :span="3"><el-button plain class="c-full" round size="small">{{item.title}}</el-button></el-col>
+            </template>
+          </el-row>
+        </div>
+        <el-main>
+          <div style="margin-top:210px;">
+            <template v-for="item of mainData.Data">
+              <el-row class="card card_bar">
+                <el-col :span="3">
+                  <div>{{item.studyTime}}</div>
+                  <div>{{item.classOpen}}</div>
+                  <div>{{item.section}}</div>
+                  <div>{{item.classType}}</div>
+                  <div>{{item.ifHistory}}</div>
+                </el-col>
+                <el-col :span="6">
+                  <div style="font-size:1.25rem;margin-top:0.3rem;margin-bottom:0.5rem;">{{item.className}}</div>
+                  <div>{{mainData.Header.lvLearned}} {{item.lvLearned}}</div>
+                  <div>{{mainData.Header.lvFun}} {{item.lvFun}}</div>
+                  <div>{{mainData.Header.lvWork}} {{item.lvWork}}</div>
+                  <br>
+                  <div v-if="item.ifGroupReport=='有'">{{mainData.Header.ifGroupReport}}</div>
+                  <div v-if="item.ifPersonalReport=='有'">{{mainData.Header.ifPersonalReport}}</div>
+                  <div v-if="item.ifPersonalReport=='有'">{{mainData.Header.ifPersonalReport}}</div>
+                  <div v-if="item.ifOtherWork=='有'">{{mainData.Header.ifOtherWork}}</div>
+                  <br>
+                  <div>{{mainData.Header.lvExamAmount}} {{item.lvExamAmount}}</div>
+                  <br>
+                  <div v-if="item.ifSmallExam=='有'">{{mainData.Header.ifSmallExam}}</div>
+                  <div v-if="item.ifMidExam=='有'">{{mainData.Header.ifMidExam}}</div>
+                  <div v-if="item.ifFinalExam=='有'">{{mainData.Header.ifFinalExam}}</div>
+                  <div v-if="item.ifOtherExam=='有'">{{mainData.Header.ifOtherExam}}</div>
+                  <br>
+                </el-col>
+                <el-col :span="6">
+                  <div style="font-size:1.25rem;margin-top:0.3rem;margin-bottom:0.5rem;">{{item.teaher}}</div>
+                  <div>{{mainData.Header.lvTeachlear}} {{item.lvTeachlear}}</div>
+                  <div>{{mainData.Header.lvRequest}} {{item.lvRequest}}</div>
+                </el-col>
+                <el-col :span="9">
+                  <div style="font-size:1.25rem;margin-top:0.3rem;margin-bottom:0.5rem;">
+                    <template v-for="n in Number(item.lv_recommend)"><i class="fas fa-heart heart-margn" style="color:#EB9F9F"></i></template>
+                  </div>
+                  <div>{{item.message}}</div>
+                  <br>
+                  <div>{{item.createDate}}</div>
+                  <br>
+                </el-col>
+              </el-row>
+            </template>
+          </div>
+        </el-main>
+        <el-footer class="footer" height=40>
+            2018 weiliewonka 
+        </el-footer>
+    </el-container>
+  </div> <!-- app -->
+<script>
+  new Vue({
+    el: '#app',
+    data: function () {
+      return { 
+        visible: false,
+        liveTitle: ' -- ',
+        mainTitle: '',
+        input: '',
+        def_padding: {span:16,offset:4},
+        mainData: {},
+        searchVal: '',
+        filters: [
+          {title: '最新評價', val: '最新評價'},
+          {title: '人文通識評價', val: '人文通識評價'},
+          {title: '自然通識評價', val: '自然通識評價'},
+          {title: '社會通識評價', val: '社會通識評價'},
+          {title: '歷史通識評價', val: '歷史通識評價'},
+          {title: '體育評價', val: '體育評價'}
+        ],
+        orders: [
+          {title: '推薦高至低', val: '推薦高至低'},
+          {title: '作業低至高', val: '作業低至高'},
+          {title: '考試少至多', val: '考試少至多'},
+          {title: '收穫高至低', val: '收穫高至低'},
+          {title: '有趣高至低', val: '有趣高至低'},
+          {title: '要求少至多', val: '要求少至多'},
+          {title: '時間新至舊', val: '時間新至舊'}
+        ],
+      }
+    },
+    created: function () {
+      this.geData();
+    },
+    methods: {
+      submit(txt){
+        axios({
+          method: 'post',
+          url: '/title',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          data: {
+            title: txt,
+          }
+        })
+        .then((response) => {
+          this.liveTitle = response.data.title
+          this.$message({
+            showClose: true,
+            message: `設定標題為 : ${response.data.title}`,
+            type: 'success'
+          })
+        })
+        .catch((error) => {
+          this.$message({
+            message: error,
+            type: 'error'
+          })
+        });
+      },
+      geData() {
+
+        //https://spreadsheets.google.com/feeds/cells/1YTB-i8QK7tx53am4uqycHVKLy1EUhfOBNYG-1GXjSRI/2/public/values?alt=json
+        axios({
+          method: 'get',
+          url: '/data/data.json',
+        })
+        .then((response) => {
+          this.mainData = response.data;
+          console.log(this.mainData);
+          this.$message({
+            showClose: true,
+            message: '讀取資料成功！',
+          })
+        })
+        .catch((error) => {
+          console.error(error)
+          this.$message({
+            message: error,
+            type: 'error'
+          })
+        });
+      },
+      handleData (rows, data) {
+        let output = {
+          headers:[],
+          data:[]
+        }
+        for (let i=0 ; i < rows ; i++) {
+          let temp = data.shift();
+          output.headers.push(temp['gs$cell']['$t'])
+        }
+        let temp = {};
+        let rowNm = data[0]['gs$cell']['row'];
+
+        for (const item of data) {
+          if ( item['gs$cell']['row'] === rowNm ) {
+            temp['item'+item['gs$cell']['col']] = item['gs$cell']['$t']
+          } else {
+            output.data.push(temp);
+            temp = {};
+            rowNm = item['gs$cell']['row'];
+            temp['item'+item['gs$cell']['col']] = item['gs$cell']['$t']
+          }
+          
+        }
+        return output
+      }
+    }
+    
+  })
+</script>
+</body>
+</html>
