@@ -24,6 +24,7 @@
     padding: 0;
     margin: 0;
     font-family: Arial, Helvetica, sans-serif;
+    font-size: 1rem;
   }
   .head{
     background-color: #EB9F9F;
@@ -43,13 +44,19 @@
     border-bottom: RGB(0,0,0,0.12) solid 1px;
     padding:10px 10px;
   }
+  .filter-active {
+    background-color: #EB9F9F;
+    color: #FFFFFF;
+  }
+
+
   .order_bar_br{
     background-color: #FFFFFF;
     padding:10px 0px;
   }
   .order_bar{
-    width: 80%;
-    left: 10%;
+    width: 90%;
+    left: 5%;
     margin: 0px 0px;
   }
 
@@ -81,8 +88,8 @@
   }
 
   .card_bar {
-    width: 70%;
-    left: 15%;
+    width: 90%;
+    left: 5%;
     margin: 0px 0px;
   }
 
@@ -148,7 +155,16 @@
         <div class="fixed" style="top:60px;">
           <el-row :gutter="20" class="filter_bar" >
             <template v-for="item of filters">
-                <el-col :span="3"><el-button plain class="c-full c-btn" size="medium">{{item.title}}</el-button></el-col>
+                <el-col :span="3">
+                  <el-button 
+                    plain 
+                    class="c-full c-btn" 
+                    size="medium"
+                    @click="onFilter(item.action)"
+                   >{{item.title}}
+                    
+                  </el-button>
+                </el-col>
             </template>
             <el-col :span="6">
               <el-input placeholder="请输入内容" v-model="searchVal" class="input-with-select c-full">
@@ -171,7 +187,7 @@
           <div v-if="!loading" style="margin-top:210px;">
             <template v-for="item of mainData.Data">
               <el-row class="card card_bar">
-                <el-col :span="3">
+                <el-col :span="4">
                   <div>{{item.studyTime}}</div>
                   <div>{{item.classOpen}}</div>
                   <div>{{item.section}}</div>
@@ -197,7 +213,7 @@
                   <div v-if="item.ifOtherExam=='有'">{{mainData.Header.ifOtherExam}}</div>
                   <br>
                 </el-col>
-                <el-col :span="6">
+                <el-col :span="5">
                   <div style="font-size:1.25rem;margin-top:0.3rem;margin-bottom:0.5rem;">{{item.teaher}}</div>
                   <div>{{mainData.Header.lvTeachlear}} {{item.lvTeachlear}}</div>
                   <div>{{mainData.Header.lvRequest}} {{item.lvRequest}}</div>
@@ -230,14 +246,15 @@
       return { 
         mainData: {},
         searchVal: '',
+        currentFilter: '',
         loading: true,
         filters: [
-          {title: '最新評價', val: '最新評價'},
-          {title: '人文通識評價', val: '人文通識評價'},
-          {title: '自然通識評價', val: '自然通識評價'},
-          {title: '社會通識評價', val: '社會通識評價'},
-          {title: '歷史通識評價', val: '歷史通識評價'},
-          {title: '體育評價', val: '體育評價'}
+          {title: '最新評價', val: '最新評價', action:'newest', active: true},
+          {title: '人文通識評價', val: '人文通識評價', action:'humanities', active: false},
+          {title: '自然通識評價', val: '自然通識評價', action:'physic', active: false},
+          {title: '社會通識評價', val: '社會通識評價', action:'social', active: false},
+          {title: '歷史通識評價', val: '歷史通識評價', action:'history', active: false},
+          {title: '體育評價', val: '體育評價', action:'sports', active: false}
         ],
         orders: [
           {title: '推薦高至低', val: '推薦高至低'},
@@ -255,7 +272,6 @@
     },
     methods: {
       geData() {
-        //https://spreadsheets.google.com/feeds/cells/1YTB-i8QK7tx53am4uqycHVKLy1EUhfOBNYG-1GXjSRI/2/public/values?alt=json
         axios({
           method: 'get',
           url: '/data/data.json',
@@ -276,6 +292,17 @@
             type: 'error'
           })
         });
+      },
+      onFilter(option){
+        switch (option){
+          case 'newest':
+            this.geData();
+            break;
+          case 'sports':
+            this.mainData = this.mainData.filter(data => data.classType.indexOf("體育") >=0 );
+            break;
+        } 
+        this.currentFilter = option;
       }
     }
   })
