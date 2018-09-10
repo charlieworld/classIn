@@ -25,7 +25,9 @@
     margin: 0;
     font-family: Arial, Helvetica, sans-serif;
     font-size: 1rem;
+    overflow:hidden;
   }
+  
   .head{
     background-color: #EB9F9F;
     color: #FFFFFF;
@@ -39,13 +41,55 @@
     width: 100%;
   }
 
+  .p-light {
+    color: #FFD1D0
+  }
+
+  .c-btn {
+    border: #EB9F9F solid 2px;
+    background-color: #FFFFFF;
+    color: #EB9F9F;
+  }
+  .c-btn-head {
+    background-color: transparent;
+    border: #FFFFFF solid 2px;
+    color: #FFFFFF;
+    margin-top:10px;
+  }
+  .c-btn-head-active {
+    background-color:#FFFFFF;
+    border: #FFFFFF solid 2px;
+    color: #EB9F9F;
+  }
+  .c-btn-more {
+    margin-top:30px;
+  }
+  .c-btn-order {
+    font-size: 0.9rem;
+    border: #A79C8E solid 2px;
+    color: A79C8E;
+  }
+  .c-btn-order-active {
+    background-color: #A79C8E;
+    color: #FFFFFF;
+  }
+
   .filter_bar{
     background-color: #FFFFFF;
     border-bottom: RGB(0,0,0,0.12) solid 1px;
-    padding:10px 10px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    padding-left: 10px;
+    padding-right: 20px;
   }
   .filter-active {
     background-color: #EB9F9F;
+    color: #FFFFFF;
+  }
+
+  .el-button.is-plain:focus, .el-button.is-plain:hover {
+    background-color: #B77071;
+    border: #B77071 solid 2px;
     color: #FFFFFF;
   }
 
@@ -59,32 +103,42 @@
     left: 5%;
     margin: 0px 0px;
   }
-
-  .c-btn-head{
-    background-color: transparent;
-    border: #FFFFFF solid 1px;
-    color: #FFFFFF;
-  }
-
-  .c-btn-head-active {
-    color:#EB9F9F
-  }
-
-  .c-btn-head:hover, .c-btn-head-active:hover {
-    border: #EB9F9F solid 1px;
+  .el-input__inner, .el-input-group__append {
     background-color: #FFFFFF;
+    border: #EB9F9F solid 2px;
+    color: #EB9F9F;
+  }
+  .el-input__inner {
+    border-radius: 40px 0px 0px 40px;
+    height: 36px;
+  }
+  .el-input-group__append {
+    padding-left: 15px;
+    border-left: 0px;
+    border-radius: 0px 40px 40px 0px;
+  }
+  .el-input__inner:hover {
+    border: #EB9F9F solid 2px;
+  }
+  .el-input__inner::placeholder { /* Chrome, Firefox, Opera, Safari 10.1+ */
+    color: #EB9F9F;
+    opacity: 1; /* Firefox */
+  }
+
+  .el-input__inner:-ms-input-placeholder { /* Internet Explorer 10-11 */
     color: #EB9F9F;
   }
 
-  .c-btn {
-    border: #EB9F9F solid 1px;
-    background-color: #FFFFFF;
+  .el-input__inner::-ms-input-placeholder { /* Microsoft Edge */
     color: #EB9F9F;
   }
 
-  .el-input__inner, .el-input-group__append{
-    border: #EB9F9F solid 1px;
-    color: #EB9F9F;
+ 
+
+  .el-button--medium {
+    padding-left: 0px;
+    padding-right: 0px; 
+    text-align: center;
   }
 
   .card_bar {
@@ -106,13 +160,11 @@
     z-index:100;
   }
   .footer {
+    bottom: 0px;
     background-color:#F8ECC9;
     text-align: center;
     line-height: 40px;
     color: #A79C8E;
-    position: fixed;
-    bottom: 0px;
-    width: 100vw;
   }
   .loading {
     position: fixed;
@@ -125,6 +177,33 @@
     text-align: center;
     line-height: 97vh;
   }
+  .el-button.is-round{
+    padding-left: 0px;
+    padding-right: 0px;
+    text-align: center;
+    border-radius: 40px;
+  }
+
+  .form_frame {
+    margin-top: 65px;
+    width: 100vw;
+    height: 100vh;
+  }
+  .review_frame {
+    width: 100vw;
+    height: 100vh;
+    overflow-y:auto;
+    margin-top:180px;
+    padding-bottom: 350px;
+  }
+  .more_frame{
+    width: 100%;
+    text-align: center
+  }
+  .text-hightlight{
+    color: #EB9F9F;
+  }
+
 
 </style>
 
@@ -134,104 +213,153 @@
         <el-header class="head fixed">
             <el-row :gutter="20">
               <el-col :span="12" style="line-height: 60px;">輔大選課資訊交流平台</el-col>
-              <el-col :span="3" :offset="6">
-                <el-button plain round 
-                  style="
-                    margin-top:10px;
-                    background-color:FFFFFF;
-                    border: #FFFFFF solid 1px;
-                    color: #EB9F9F;"
-                  class="c-full">查看評價</el-button></el-col>
-              <el-col :span="3">
-                <el-button plain round 
-                style="
-                  margin-top:10px; 
-                  background-color: transparent;
-                  border: #FFFFFF solid 1px;
-                  color: #FFFFFF;" 
-                class="c-full">新增評價</el-button></el-col>
+              <template v-for="(item, index) of pages">
+                <template v-if="index == 0">
+                  <el-col :span="3" :offset="6">
+                    <el-button plain round 
+                      class="c-full c-btn-head"
+                      v-bind:class="{'c-btn-head-active': item.active}"
+                      @click="onPage(item.action)">{{item.title}}</el-button>
+                    </el-col>
+                </template>
+                <template v-else>
+                  <el-col :span="3">
+                    <el-button plain round 
+                      class="c-full c-btn-head"
+                      v-bind:class="{'c-btn-head-active': item.active}"
+                      @click="onPage(item.action)">{{item.title}}</el-button>
+                  </el-col>
+                </template>
+              </template>
             </el-row>
         </el-header>
-        <div class="fixed" style="top:60px;">
-          <el-row :gutter="20" class="filter_bar" >
-            <template v-for="item of filters">
-                <el-col :span="3">
-                  <el-button 
-                    plain 
-                    class="c-full c-btn" 
-                    size="medium"
-                    @click="onFilter(item.action)"
-                   >{{item.title}}
-                    
-                  </el-button>
-                </el-col>
-            </template>
-            <el-col :span="6">
-              <el-input placeholder="请输入内容" v-model="searchVal" class="input-with-select c-full">
-                <el-button slot="append" icon="el-icon-search"></el-button>
-              </el-input>                
-            </el-col>
-          </el-row>
-        </div>
-        <div class="order_bar_br fixed" style="top:121px;">
-          <el-row :gutter="10" class="order_bar">
-            <el-col :span="3" style="line-height:35px;text-align: right;font-size: 14px;">
-                排序依照：               
-            </el-col>
-            <template v-for="item of orders">
-                <el-col :span="3"><el-button plain class="c-full" round size="small">{{item.title}}</el-button></el-col>
-            </template>
-          </el-row>
-        </div>
-        <el-main>
-          <div v-if="!loading" style="margin-top:210px;">
-            <template v-for="item of mainData.Data">
-              <el-row class="card card_bar">
-                <el-col :span="4">
-                  <div>{{item.studyTime}}</div>
-                  <div>{{item.classOpen}}</div>
-                  <div>{{item.section}}</div>
-                  <div>{{item.classType}}</div>
-                  <div>{{item.ifHistory}}</div>
-                </el-col>
-                <el-col :span="6">
-                  <div style="font-size:1.25rem;margin-top:0.3rem;margin-bottom:0.5rem;">{{item.className}}</div>
-                  <div>{{mainData.Header.lvLearned}} {{item.lvLearned}}</div>
-                  <div>{{mainData.Header.lvFun}} {{item.lvFun}}</div>
-                  <div>{{mainData.Header.lvWork}} {{item.lvWork}}</div>
-                  <br>
-                  <div v-if="item.ifGroupReport=='有'">{{mainData.Header.ifGroupReport}}</div>
-                  <div v-if="item.ifPersonalReport=='有'">{{mainData.Header.ifPersonalReport}}</div>
-                  <div v-if="item.ifPersonalReport=='有'">{{mainData.Header.ifPersonalReport}}</div>
-                  <div v-if="item.ifOtherWork=='有'">{{mainData.Header.ifOtherWork}}</div>
-                  <br>
-                  <div>{{mainData.Header.lvExamAmount}} {{item.lvExamAmount}}</div>
-                  <br>
-                  <div v-if="item.ifSmallExam=='有'">{{mainData.Header.ifSmallExam}}</div>
-                  <div v-if="item.ifMidExam=='有'">{{mainData.Header.ifMidExam}}</div>
-                  <div v-if="item.ifFinalExam=='有'">{{mainData.Header.ifFinalExam}}</div>
-                  <div v-if="item.ifOtherExam=='有'">{{mainData.Header.ifOtherExam}}</div>
-                  <br>
-                </el-col>
-                <el-col :span="5">
-                  <div style="font-size:1.25rem;margin-top:0.3rem;margin-bottom:0.5rem;">{{item.teaher}}</div>
-                  <div>{{mainData.Header.lvTeachlear}} {{item.lvTeachlear}}</div>
-                  <div>{{mainData.Header.lvRequest}} {{item.lvRequest}}</div>
-                </el-col>
-                <el-col :span="9">
-                  <div style="font-size:1.25rem;margin-top:0.3rem;margin-bottom:0.5rem;">
-                    <template v-for="n in Number(item.lv_recommend)"><i class="fas fa-heart heart-margn" style="color:#EB9F9F"></i></template>
-                  </div>
-                  <div>{{item.message}}</div>
-                  <br>
-                  <div>{{item.createDate}}</div>
-                  <br>
-                </el-col>
-              </el-row>
-            </template>
+        <template v-if="currentPage == 'review'"> <!-- page review -->
+          <div class="fixed" style="top:60px;">
+            <el-row :gutter="20" class="filter_bar" >
+              <template v-for="item of filters">
+                  <el-col :span="3">
+                    <el-button 
+                      plain 
+                      class="c-full c-btn" 
+                      size="medium"
+                      @click="onFilter(item.action)"
+                      v-bind:class="{'filter-active': item.active}"
+                     >{{item.title}}
+                    </el-button>
+                  </el-col>
+              </template>
+              <el-col :span="6">
+                <el-input placeholder="搜尋   課程名稱 or 教師姓名" v-model="searchVal" class="input-with-select c-full">
+                  <el-button slot="append" icon="el-icon-search" @click="onSearch()"></el-button>
+                </el-input>                
+              </el-col>
+            </el-row>
           </div>
-        </el-main>
-        <el-footer class="footer" height=40>
+          <div class="order_bar_br fixed" style="top:119px;">
+            <el-row :gutter="10" class="order_bar">
+              <el-col :span="3" style="line-height:36px;text-align: right;font-size: 14px;">
+                  排序依照：               
+              </el-col>
+              <template v-for="item of orders">
+                  <el-col :span="3">
+                    <el-button 
+                      plain class="c-full c-btn-order" 
+                      round size="small"
+                      @click="onOrder(item.action)"
+                      v-bind:class="{'c-btn-order-active': item.active}"
+                      >{{item.title}}</el-button> 
+                  </el-col>
+              </template>
+            </el-row>
+          </div>
+          <el-main class="review_frame">
+            <div v-if="!loading">
+              <template v-for="(item, index) of currentData">
+                <el-row class="card card_bar">
+                  <el-col :span="3">
+                    <div style="font-size:1.25rem;margin-top:0.3rem;margin-bottom:0.5rem;">{{index+1}}</div>
+                    <div>DATA ID:{{item.index}}</div>
+                    <div>{{item.studyTime}}</div>
+                    <div>{{item.classOpen}}</div>
+                    <div>{{item.section}}</div>
+                    <div>{{item.classType}}</div>
+                    <div v-if="item.ifHistory=='是'">歷史</div>
+                  </el-col>
+                  <el-col :span="7">
+                    <div style="font-size:1.25rem;margin-top:0.3rem;margin-bottom:0.5rem;">{{item.className}}</div>
+                    <template v-if="currentOrder == 'learned'">
+                        <div class="text-hightlight">{{sourceData.Header.lvLearned}} {{item.lvLearned}}</div>
+                    </template>
+                    <template v-else>
+                        <div>{{sourceData.Header.lvLearned}} {{item.lvLearned}}</div>
+                    </template>
+                    <template v-if="currentOrder == 'fun'">
+                        <div class="text-hightlight">{{sourceData.Header.lvFun}} {{item.lvFun}}</div>
+                    </template>
+                    <template v-else>
+                        <div>{{sourceData.Header.lvFun}} {{item.lvFun}}</div>
+                    </template>
+                    <template v-if="currentOrder == 'work'">
+                        <div class="text-hightlight">{{sourceData.Header.lvWork}} {{item.lvWork}}</div>
+                    </template>
+                    <template v-else>
+                        <div>{{sourceData.Header.lvWork}} {{item.lvWork}}</div>
+                    </template>
+                    <br>
+                    <div v-if="item.ifGroupReport=='有'">{{sourceData.Header.ifGroupReport}}</div>
+                    <div v-if="item.ifPersonalReport=='有'">{{sourceData.Header.ifPersonalReport}}</div>
+                    <div v-if="item.ifPersonalReport=='有'">{{sourceData.Header.ifPersonalReport}}</div>
+                    <div v-if="item.ifOtherWork=='有'">{{sourceData.Header.ifOtherWork}}</div>
+                    <br>
+                    <template v-if="currentOrder == 'exam'">
+                        <div class="text-hightlight">{{sourceData.Header.lvExamAmount}} {{item.lvExamAmount}}</div>
+                    </template>
+                    <template v-else>
+                        <div>{{sourceData.Header.lvExamAmount}} {{item.lvExamAmount}}</div>
+                    </template>
+                    <br>
+                    <div v-if="item.ifSmallExam=='有'">{{sourceData.Header.ifSmallExam}}</div>
+                    <div v-if="item.ifMidExam=='有'">{{sourceData.Header.ifMidExam}}</div>
+                    <div v-if="item.ifFinalExam=='有'">{{sourceData.Header.ifFinalExam}}</div>
+                    <div v-if="item.ifOtherExam=='有'">{{sourceData.Header.ifOtherExam}}</div>
+                    <br>
+                  </el-col>
+                  <el-col :span="5">
+                    <div style="font-size:1.25rem;margin-top:0.3rem;margin-bottom:0.5rem;">{{item.teaher}}</div>
+                    <div>{{sourceData.Header.lvTeachlear}} {{item.lvTeachlear}}</div>
+                    <template v-if="currentOrder == 'request'">
+                        <div class="text-hightlight">{{sourceData.Header.lvRequest}} {{item.lvRequest}}</div>
+                    </template>
+                    <template v-else>
+                        <div>{{sourceData.Header.lvRequest}} {{item.lvRequest}}</div>
+                    </template>
+                  </el-col>
+                  <el-col :span="9">
+                    <div style="font-size:1.25rem;margin-top:0.3rem;margin-bottom:0.5rem;">
+                      <template v-for="n in Number(item.lv_recommend)"><i class="fas fa-heart heart-margn" style="color:#EB9F9F"></i></template>
+                    </div>
+                    <div>{{item.message}}</div>
+                    <br>
+                    <div>{{item.createDate}}</div>
+                    <br>
+                  </el-col>
+                </el-row>
+              </template>
+              <div class="more_frame" v-if="ifMore">
+                <el-button plain round class="c-full c-btn-more" style="max-width:600px;" @click="more()">顯示更多</el-button>
+              </div>
+              <div class="more_frame" style="color:#A79C8E" v-else>
+                <h5>-- 沒有更多資料惹 --</h5>
+              </div>
+            </div>
+          </el-main>
+        </template> <!-- page review -->
+        <template v-else-if="currentPage == 'addNew'"> <!-- page addNew -->
+          <div style="text-align: center;">
+            <iframe class="form_frame" src="https://docs.google.com/forms/d/19u2KhAZMYkx6D-yftwX7aWMnJEyARVk99j58r7Qc_Pc/viewform?edit_requested=true#start=embed"  frameborder=0 scrolling="yes"></iframe>
+          </div>
+        </template>
+        <el-footer class="fixed footer" height=40>
             2018 weiliewonka 
         </el-footer>
         <div v-if="loading" class="loading">
@@ -243,27 +371,38 @@
   new Vue({
     el: '#app',
     data: function () {
-      return { 
-        mainData: {},
+      return {
+        sourceData: {},
+        mainData: [],
+        currentData: [],
         searchVal: '',
+        currentPage: 'review',
         currentFilter: '',
+        currentOrder: 'time',
         loading: true,
+        ifMore: true,
+        pageNum:1,
+        pageLimit: 20,
+        pages:[
+          {title: '查看評價', action:'review', active: true},
+          {title: '新增評價', action:'addNew', active: false},
+        ],
         filters: [
-          {title: '最新評價', val: '最新評價', action:'newest', active: true},
-          {title: '人文通識評價', val: '人文通識評價', action:'humanities', active: false},
-          {title: '自然通識評價', val: '自然通識評價', action:'physic', active: false},
-          {title: '社會通識評價', val: '社會通識評價', action:'social', active: false},
-          {title: '歷史通識評價', val: '歷史通識評價', action:'history', active: false},
-          {title: '體育評價', val: '體育評價', action:'sports', active: false}
+          {title: '所有評價', action:'newest', active: true},
+          {title: '人文通識評價', action:'humanities', active: false},
+          {title: '自然通識評價', action:'physic', active: false},
+          {title: '社會通識評價', action:'social', active: false},
+          {title: '歷史通識評價', action:'history', active: false},
+          {title: '體育評價', action:'sports', active: false}
         ],
         orders: [
-          {title: '推薦高至低', val: '推薦高至低'},
-          {title: '作業低至高', val: '作業低至高'},
-          {title: '考試少至多', val: '考試少至多'},
-          {title: '收穫高至低', val: '收穫高至低'},
-          {title: '有趣高至低', val: '有趣高至低'},
-          {title: '要求少至多', val: '要求少至多'},
-          {title: '時間新至舊', val: '時間新至舊'}
+          {title: '推薦高至低', action:'recommend', active: false},
+          {title: '作業低至高', action:'work', active: false},
+          {title: '考試少至多', action:'exam', active: false},
+          {title: '收穫高至低', action:'learned', active: false},
+          {title: '有趣高至低', action:'fun', active: false},
+          {title: '要求少至多', action:'request', active: false},
+          {title: '時間新至舊', action:'time', active: false}
         ],
       }
     },
@@ -277,13 +416,17 @@
           url: '/data/data.json',
         })
         .then((response) => {
-          this.mainData = response.data;
-          console.log(this.mainData);
+          this.sourceData = response.data;
+          this.mainData = this.sourceData.Data;
+          this.onOrder(this.currentOrder);
+          this.currentData = this.mainData.slice(0,this.pageLimit);
+          console.log('data length :',this.mainData.length)
           this.$message({
             showClose: true,
-            message: '讀取資料成功！',
+            message: '更新資料成功！',
           })
-          this.loading = false
+          this.loading = false;
+          this.ifMore = true;
         })
         .catch((error) => {
           console.error(error)
@@ -293,16 +436,134 @@
           })
         });
       },
+      onPage(page){
+        this.currentPage = page;
+      },
       onFilter(option){
+        for (const i in this.filters) {
+          if (this.filters[i].action === option) {
+            this.filters[i].active = true;
+          } else {
+            this.filters[i].active = false;
+          }
+        }
         switch (option){
           case 'newest':
             this.geData();
             break;
-          case 'sports':
-            this.mainData = this.mainData.filter(data => data.classType.indexOf("體育") >=0 );
+          case 'humanities':
+            this.doFilter('人文');
             break;
-        } 
+          case 'physic':
+            this.doFilter('自然');
+            break;
+          case 'social':
+            this.doFilter('社會');
+            break;
+          case 'history':
+            this.historyFilter();
+            break;
+          case 'sports':
+            this.doFilter('體育');
+            break;
+        }
         this.currentFilter = option;
+        console.log('data length :',this.mainData.length);
+      },
+      doFilter(keyWord) {
+        this.mainData = this.sourceData.Data.filter(data => data.classType.indexOf(keyWord) >= 0 );
+        this.onOrder(this.currentOrder);
+        this.currentData = this.mainData.slice(0,this.pageLimit);
+      },
+      historyFilter() {
+        this.mainData = this.sourceData.Data.filter(data => data.ifHistory === '是' );
+        this.onOrder(this.currentOrder);
+        this.currentData = this.mainData.slice(0,this.pageLimit);
+      },
+      onOrder(option){
+        for (const i in this.orders) {
+          if (this.orders[i].action === option) {
+            this.orders[i].active = true;
+          } else {
+            this.orders[i].active = false;
+          }
+        }
+        this.doOrder(option);
+        this.currentOrder = option;
+        this.currentData = this.mainData.slice(0,this.pageLimit);
+      },
+      doOrder(option) {
+        this.mainData = this.mainData.sort((a, b) => {
+          let itemA = '';
+          let itemB = '';
+          switch (option) {
+            case 'recommend':
+              itemA = a.lv_recommend;
+              itemB = b.lv_recommend
+              return itemB - itemA;
+              break;
+            case 'work':
+              itemA = a.lvWork;
+              itemB = b.lvWork
+              return itemA - itemB;
+              break;
+            case 'exam':
+              itemA = a.lvExamAmount;
+              itemB = b.lvExamAmount
+              return itemA - itemB;
+              break;
+            case 'learned':
+              itemA = a.lvLearned;
+              itemB = b.lvLearned
+              return itemB - itemA;
+              break;
+            case 'fun':
+              itemA = a.lvFun;
+              itemB = b.lvFun
+              return itemB - itemA;
+              break;
+            case 'request':
+              itemA = a.lvRequest;
+              itemB = b.lvRequest
+              return itemA - itemB;
+              break;  
+            default:
+              itemA = a.createDate;
+              itemB = b.createDate
+              if (itemA > itemB) {
+                return -1;
+              }
+              if (itemA < itemB) {
+                return 1;
+              }
+              return 0;
+              break;
+          }
+        });
+      },
+      onSearch(){
+        const textArr =  this.searchVal.split(" ")
+        let cake = [];
+        for (const target of textArr) {
+          console.log('target :',this.sourceData.Data.filter(data => data.className.indexOf(target) >= 0));
+          cake = cake.concat(this.sourceData.Data.filter(data => data.className.indexOf(target) >= 0 ));
+          cake = cake.concat(this.sourceData.Data.filter(data => data.teaher.indexOf(target) >= 0 ));
+        }
+        this.mainData = cake;
+        this.onOrder(this.currentOrder);
+        this.currentData = this.mainData.slice(0,this.pageLimit);
+      },
+      more(){
+        let now = this.pageNum*this.pageLimit;
+        const end = now + this.pageLimit
+        this.pageNum ++;
+        const cake = this.mainData.slice(now, end);
+        if ( cake.length > 0 ) {
+          this.currentData = this.currentData.concat(cake);
+        } else {
+          this.ifMore = false;
+        }
+
       }
     }
   })

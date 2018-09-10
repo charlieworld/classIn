@@ -73,6 +73,7 @@ func reFormatData(keys []string, data []interface{}) dataPack {
 	n, _ = n["gs$cell"].(map[string]interface{})
 	rowNm, _ := n["row"]
 
+	indexCount := 1
 	for _, item := range data {
 
 		d, _ := item.(map[string]interface{})
@@ -82,12 +83,14 @@ func reFormatData(keys []string, data []interface{}) dataPack {
 			output.Data = append(output.Data, temp)
 			temp = make(map[string]interface{})
 			rowNm = d["row"]
+			indexCount++
 		}
 
 		s := d["col"].(string)
 		i, _ := strconv.Atoi(s)
 		keyName := keys[i-1]
 		temp[keyName] = d["$t"]
+		temp["index"] = indexCount
 
 	}
 	return output
