@@ -274,7 +274,7 @@
                   </el-col>
               </template>
               <el-col :span="6">
-                <el-input placeholder="搜尋   課程名稱 or 教師姓名" v-model="searchVal" class="input-with-select c-full">
+                <el-input placeholder="搜尋   課程名稱 or 教師姓名" v-model="searchVal" @change="onSearch()" class="input-with-select c-full">
                   <el-button slot="append" icon="el-icon-search" @click="onSearch()"></el-button>
                 </el-input>                
               </el-col>
@@ -332,7 +332,6 @@
                     </template>
                     <br>
                     <div v-if="item.ifGroupReport=='有'">{{sourceData.Header.ifGroupReport}}</div>
-                    <div v-if="item.ifPersonalReport=='有'">{{sourceData.Header.ifPersonalReport}}</div>
                     <div v-if="item.ifPersonalReport=='有'">{{sourceData.Header.ifPersonalReport}}</div>
                     <div v-if="item.ifOtherWork=='有'">{{sourceData.Header.ifOtherWork}}</div>
                     <br>
@@ -567,16 +566,21 @@
         });
       },
       onSearch(){
-        const textArr =  this.searchVal.split(" ")
-        let cake = [];
-        for (const target of textArr) {
-          console.log('target :',this.sourceData.Data.filter(data => data.className.indexOf(target) >= 0));
-          cake = cake.concat(this.sourceData.Data.filter(data => data.className.indexOf(target) >= 0 ));
-          cake = cake.concat(this.sourceData.Data.filter(data => data.teaher.indexOf(target) >= 0 ));
+
+        if (this.searchVal === '') {
+          this.geData();
+        } else {
+          const textArr =  this.searchVal.split(" ")
+          let cake = [];
+          for (const target of textArr) {
+            console.log('target :',this.sourceData.Data.filter(data => data.className.indexOf(target) >= 0));
+            cake = cake.concat(this.sourceData.Data.filter(data => data.className.indexOf(target) >= 0 ));
+            cake = cake.concat(this.sourceData.Data.filter(data => data.teaher.indexOf(target) >= 0 ));
+          }
+          this.mainData = cake;
+          this.onOrder(this.currentOrder);
+          this.currentData = this.mainData.slice(0,this.pageLimit);
         }
-        this.mainData = cake;
-        this.onOrder(this.currentOrder);
-        this.currentData = this.mainData.slice(0,this.pageLimit);
       },
       more(){
         let now = this.pageNum*this.pageLimit;
