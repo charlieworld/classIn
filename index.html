@@ -451,7 +451,7 @@
           this.mainData = this.sourceData.Data;
           this.onOrder(this.currentOrder);
           this.currentData = this.mainData.slice(0,this.pageLimit);
-          console.log('data length :',this.mainData.length)
+          //console.log('data length :',this.mainData.length)
           this.$message({
             showClose: true,
             message: '更新資料成功！',
@@ -499,10 +499,9 @@
             break;
         }
         this.currentFilter = option;
-        console.log('data length :',this.mainData.length);
+        //console.log('data length :',this.mainData.length);
       },
       doFilter(keyWord) {
-        console.log(this.sourceData.Data)
         this.mainData = this.sourceData.Data.filter(data => data.classType.indexOf(keyWord) >= 0 );
         this.onOrder(this.currentOrder);
         this.currentData = this.mainData.slice(0,this.pageLimit);
@@ -581,7 +580,6 @@
           const textArr =  this.searchVal.split(" ")
           let cake = [];
           for (const target of textArr) {
-            console.log('target :',this.sourceData.Data.filter(data => data.className.indexOf(target) >= 0));
             cake = cake.concat(this.sourceData.Data.filter(data => data.className.indexOf(target) >= 0 ));
             cake = cake.concat(this.sourceData.Data.filter(data => data.teaher.indexOf(target) >= 0 ));
           }
