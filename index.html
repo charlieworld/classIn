@@ -97,12 +97,19 @@
   .order_bar_br{
     background-color: #FFFFFF;
     padding:10px 0px;
+    top:119px;
   }
   .order_bar{
     width: 90%;
     left: 5%;
     margin: 0px 0px;
   }
+  .order_bar_title{
+    line-height:40px;
+    text-align: right;
+    font-size: 1rem;
+  }
+
   .el-input__inner, .el-input-group__append {
     background-color: #FFFFFF;
     border: #EB9F9F solid 2px;
@@ -213,7 +220,7 @@
         <el-header class="head fixed">
             <el-row :gutter="20">
               <el-col :span="12" style="line-height: 60px; margin-top: 6px;">
-                  <svg width="420px" height="47px" viewBox="0 0 420 47" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+                  <svg style="height:47px;" viewBox="0 0 420 47" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
                     <!-- Generator: Sketch 43.2 (39069) - http://www.bohemiancoding.com/sketch -->
                     <desc>Created with Sketch.</desc>
                     <defs></defs>
@@ -280,9 +287,9 @@
               </el-col>
             </el-row>
           </div>
-          <div class="order_bar_br fixed" style="top:119px;">
+          <div class="order_bar_br fixed">
             <el-row :gutter="10" class="order_bar">
-              <el-col :span="3" style="line-height:36px;text-align: right;font-size: 14px;">
+              <el-col :span="3" class="order_bar_title">
                   排序依照：               
               </el-col>
               <template v-for="item of orders">
@@ -495,6 +502,7 @@
         console.log('data length :',this.mainData.length);
       },
       doFilter(keyWord) {
+        console.log(this.sourceData.Data)
         this.mainData = this.sourceData.Data.filter(data => data.classType.indexOf(keyWord) >= 0 );
         this.onOrder(this.currentOrder);
         this.currentData = this.mainData.slice(0,this.pageLimit);

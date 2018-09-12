@@ -43,7 +43,7 @@ func main() {
 
 	// reformat data
 	output := reFormatData(conf.ColKeys, entry)
-	fmt.Printf("[FACTORY] (3/4) Reformat data DONE !\n")
+	fmt.Printf("[FACTORY] (3/4) Reformat data done! total data : %v \n", len(output.Data))
 
 	// encode json and write file
 	outputJSON, _ := json.Marshal(output)
@@ -71,27 +71,29 @@ func reFormatData(keys []string, data []interface{}) dataPack {
 	temp := make(map[string]interface{})
 	n, _ := data[0].(map[string]interface{})
 	n, _ = n["gs$cell"].(map[string]interface{})
-	rowNm, _ := n["row"]
+	//rowNm, _ := n["row"]
 
 	indexCount := 1
+	colCount := 0
 	for _, item := range data {
 
 		d, _ := item.(map[string]interface{})
 		d, _ = d["gs$cell"].(map[string]interface{})
-
-		if d["row"] != rowNm {
-			output.Data = append(output.Data, temp)
-			temp = make(map[string]interface{})
-			rowNm = d["row"]
-			indexCount++
-		}
 
 		s := d["col"].(string)
 		i, _ := strconv.Atoi(s)
 		keyName := keys[i-1]
 		temp[keyName] = d["$t"]
 		temp["index"] = indexCount
+		colCount++
 
+		if colCount == len(keys) {
+			output.Data = append(output.Data, temp)
+			temp = make(map[string]interface{})
+			//rowNm = d["row"]
+			indexCount++
+			colCount = 0
+		}
 	}
 	return output
 }
