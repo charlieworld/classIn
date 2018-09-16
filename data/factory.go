@@ -83,6 +83,14 @@ func reFormatData(keys []string, data []interface{}) dataPack {
 		s := d["col"].(string)
 		i, _ := strconv.Atoi(s)
 		keyName := keys[i-1]
+		if d["$t"] == "null" {
+			d["$t"] = nil
+		}
+		if d["$t"] == "0" || d["$t"] == "1" || d["$t"] == "2" || d["$t"] == "3" || d["$t"] == "4" || d["$t"] == "5" {
+			in, _ := strconv.Atoi(d["$t"].(string))
+			d["$t"] = in
+		}
+
 		temp[keyName] = d["$t"]
 		temp["index"] = indexCount
 		colCount++
