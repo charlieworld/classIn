@@ -715,9 +715,12 @@
         let uri = window.location.href;
         uri = decodeURI(uri)
         uri = uri.split('?search=')[1];
-        uri = uri.replace(/,/g, ' ');
-        for (const i in uri) {
-          uri[i] = decodeURI(uri[i])
+        console.log('uri',uri);
+        if (!uri || uri === undefined || uri == null)
+        {
+          uri = '';
+        } else {
+          uri = uri.replace(/,/g, ' ');
         }
         this.searchVal = uri;
       }
