@@ -1,0 +1,242 @@
+html, body{
+  padding: 0;
+  margin: 0;
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 14px;
+  overflow:hidden;
+  color: #4A4A4A;
+  line-height: 20px;
+  text-align: justify;
+}
+
+.head{
+  background-color: #EB9F9F;
+  color: #FFFFFF;
+  font-size: 20px;	font-weight: 500;
+}
+.tags{
+  font-size: 1.1rem;
+}
+.c-full{
+  width: 100%;
+}
+
+.p-light {
+  color: #FFD1D0
+}
+
+.c-btn {
+  border: #EB9F9F solid 2px;
+  background-color: #FFFFFF;
+  color: #EB9F9F;
+}
+.c-btn-head {
+  background-color: transparent;
+  border: #FFFFFF solid 2px;
+  color: #FFFFFF;
+  margin-top:8px;
+}
+.c-btn-head-active {
+  background-color:#FFFFFF;
+  border: #FFFFFF solid 2px;
+  color: #EB9F9F;
+}
+.c-btn-more {
+  margin-top:30px;
+}
+.c-btn-order {
+  font-size: 16px;
+  font-weight: 500;
+  border: #A79C8E solid 2px;
+  color: A79C8E;
+}
+.c-btn-order-active {
+  background-color: #A79C8E;
+  color: #FFFFFF;
+}
+
+.filter_bar{
+  background-color: #FFFFFF;
+  border-bottom: RGB(0,0,0,0.12) solid 1px;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  padding-left: 10px;
+  padding-right: 20px;
+}
+.filter-active {
+  background-color: #EB9F9F;
+  color: #FFFFFF;
+}
+
+.el-button.is-plain:focus, .el-button.is-plain:hover {
+  background-color: #B77071;
+  border: #B77071 solid 2px;
+  color: #FFFFFF;
+}
+
+
+.order_bar_br{
+  background-color: #FFFFFF;
+  padding:10px 0px;
+  top:119px;
+}
+.order_bar{
+  width: 90%;
+  left: 5%;
+  margin: 0px 0px;
+}
+.order_bar_title{
+  line-height:40px;
+  text-align: right;
+  font-size: 16px;
+  font-weight: 500;
+}
+
+.el-input__inner, .el-input-group__append {
+  background-color: #FFFFFF;
+  border: #EB9F9F solid 2px;
+  color: #EB9F9F;
+}
+.el-input__inner {
+  border-radius: 40px 0px 0px 40px;
+  height: 38px;
+}
+.el-input-group__append {
+  padding-left: 15px;
+  border-left: 0px;
+  border-radius: 0px 40px 40px 0px;
+}
+.el-input__inner:hover {
+  border: #EB9F9F solid 2px;
+}
+.el-input__inner::placeholder { /* Chrome, Firefox, Opera, Safari 10.1+ */
+  color: #EB9F9F;
+  opacity: 1; /* Firefox */
+}
+
+.el-input__inner:-ms-input-placeholder { /* Internet Explorer 10-11 */
+  color: #EB9F9F;
+}
+
+.el-input__inner::-ms-input-placeholder { /* Microsoft Edge */
+  color: #EB9F9F;
+}
+
+
+
+.el-button--medium {
+  padding-left: 0px;
+  padding-right: 0px; 
+  text-align: center;
+}
+
+.card_bar {
+  width: 90%;
+  left: 5%;
+  margin: 0px 0px;
+}
+
+.card {
+  border-bottom: RGB(0,0,0,0.12) solid 1px;
+  margin-bottom: 10px;
+  padding-bottom: 10px;
+}
+.heart-margn{
+  margin-right: 0.5rem; 
+}
+
+.fixed{
+  width: 100vw;
+  position: fixed;
+  z-index:100;
+}
+.footer {
+  bottom: 0px;
+  background-color:#F8ECC9;
+  text-align: center;
+  line-height: 40px;
+  color: #A79C8E;
+}
+.loading {
+  position: fixed;
+  font-size: 2rem;
+  color: #EB9F9F;
+  background-color: RGB(255,255,255,0.3);
+  width: 100vw;
+  height: 100vh;
+  z-index: 101;
+  text-align: center;
+  line-height: 97vh;
+}
+.el-button.is-round{
+  padding-left: 0px;
+  padding-right: 0px;
+  text-align: center;
+  border-radius: 40px;
+}
+
+.el-button--medium {
+  font-size: 16px;
+  font-weight: 500;
+}
+
+.form_frame {
+  margin-top: 65px;
+  width: 100vw;
+  height: 100vh;
+}
+.review_frame {
+  width: 100vw;
+  height: 100vh;
+  overflow-y:auto;
+  margin-top:180px;
+  padding-bottom: 350px;
+}
+.more_frame{
+  width: 100%;
+  text-align: center
+}
+.text-hightlight{
+  background-color: #FCF499;
+  height: 20px;
+  width: 80px;
+  position: absolute;
+  z-index: -1;
+  margin-left: -30px;
+}
+.class_items {
+  font-size: 14px;
+  font-weight: 500;
+}
+.class_items_row {
+  height: 24px;
+  line-height: 24px;
+}
+.class_items_head_title {
+  font-size: 18px;
+  font-weight: 500;
+  margin-top:7px;
+  margin-bottom:7px;
+  text-align: left;
+}
+.dot {
+  display: inline-block;
+  height: 14px;
+  width: 14px;
+  border-radius: 7px;
+  background-color: rgba(167,156,142,0.13);
+  margin-right: 4px;
+  margin-top: 4px;
+}
+.dot-lightA {
+  background-color: #EB9F9F;
+}
+.dot-lightB {
+  background-color: #A79C8E;
+}
+.c-tag {
+  color:#FFFFFF;
+  font-size: 14px;
+  font-weight: 300;
+  margin-bottom: 5px;
+}
