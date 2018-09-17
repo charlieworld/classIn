@@ -31,26 +31,20 @@
   <div id="app">
     <el-container>
         <el-header class="head fixed">
-            <el-row :gutter="20">
-              <el-col :span="12" style="margin-top: 12px;">
-                <a href="./"><img src="./asset/logo_header.svg" style="height:36px;"></a>
-              </el-col>
-              <el-col :span="3" :offset="6">
-                <el-button plain round 
-                  class="c-full c-btn-head"
-                  @click="window.location.href='./view'">查看評價</el-button>
-              </el-col>
-              <el-col :span="3">
-                <el-button plain round 
-                  class="c-full c-btn-head"
-                  @click="window.location.href='./add'">新增評價</el-button>
-              </el-col>
-            </el-row>
+            <a href="./"><img src="./asset/logo_header.svg" style="height:36px; margin-top: 11px;"></a>
         </el-header>
-        <div class="fixed" style="top:60px;height:60px; width:100%; border-bottom: #E0E0E0 solid 1px;"></div>
+        <div class="head-right-menu fixed " v-if="!mobile()">
+          <el-button plain round class=" c-btn-head c-btn-head-active">查看評價</el-button>
+          <el-button plain round class=" c-btn-head" @click="window.location.href='./add'">新增評價</el-button>
+        </div>
+        <div class="m-head-right-menu" v-else>
+          <a href="./view"><div class="m-head-right-menu-br"><i class="fas fa-eye"></i></div></a>
+          <a href="./add"><div class="m-head-right-menu-br"><i class="fas fa-pen-fancy"></i></div></a>
+        </div>
+        <!--div class="fixed" style="top:60px;height:60px; width:100%; border-bottom: #E0E0E0 solid 1px;"></div -->
         <el-main 
           style="
-            margin-top: 120px;
+            margin-top: 60px;
             padding-left:15%;
             padding-right:15%;
             padding-bottom: 50px;
@@ -92,7 +86,7 @@
               <i class="fas fa-heart heart-margn" style="color:#EB9F9F"></i>
             </el-col>
             <el-col :span="24">
-              代表這筆評價對這門課的總推薦程度，如果你只想知道「到底推不推啊這們課？」看愛心數量就對囉！
+              代表這筆評價對這門課的總推薦程度，如果你只想知道「到底推不推啊這門課？」看愛心數量就對囉！
             </el-col>
           </el-row>
           <el-row>
@@ -125,10 +119,9 @@
             <el-col>
               <p>
                 學長姊們的分享幾乎都是掏心掏肺，如果你真的很懶得看文字的話，數這些點點、愛心是可以提供你不少資訊的唷！<br/>
-                請大家盡情享用吧！<br/>
-                <br/>
-                By 站長 2018.09
-              </p>      
+                請大家盡情享用吧！
+              </p>
+              <p style="text-align: right;">By 站長 2018.09</p>  
             </el-col>
           </el-row>
 
@@ -138,7 +131,7 @@
           2018 weiliewonka 
         </el-footer>
         <div v-if="loading" class="loading">
-            <i class="fas fa-circle-notch fa-spin 7x loading-icon"></i>
+          <i class="fas fa-circle-notch fa-spin 7x loading-icon"></i>
         </div>
     </el-container>
   </div> <!-- app -->

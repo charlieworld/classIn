@@ -31,22 +31,16 @@
   <div id="app">
     <el-container>
         <el-header class="head fixed">
-            <el-row :gutter="20">
-              <el-col :span="12" style="margin-top: 12px;">
-                <a href="./"><img src="./asset/logo_header.svg" style="height:36px;"></a>
-              </el-col>
-              <el-col :span="3" :offset="6">
-                <el-button plain round 
-                  class="c-full c-btn-head"
-                  @click="window.location.href='./view'">查看評價</el-button>
-              </el-col>
-              <el-col :span="3">
-                <el-button plain round 
-                  class="c-full c-btn-head c-btn-head-active"
-                  >新增評價</el-button>
-              </el-col>
-            </el-row>
+            <a href="./"><img src="./asset/logo_header.svg" style="height:36px; margin-top: 11px;"></a>
         </el-header>
+        <div class="head-right-menu fixed " v-if="!mobile()">
+          <el-button plain round class=" c-btn-head c-btn-head-active">查看評價</el-button>
+          <el-button plain round class=" c-btn-head" @click="window.location.href='./add'">新增評價</el-button>
+        </div>
+        <div class="m-head-right-menu" v-else>
+          <a href="./view"><div class="m-head-right-menu-br"><i class="fas fa-eye"></i></div></a>
+          <a href="./add"><div class="m-head-right-menu-br m-right-menu-active"><i class="fas fa-pen-fancy"></i></div></a>
+        </div>
         <div style="text-align: center;">
           <iframe class="form_frame" src="https://docs.google.com/forms/d/19u2KhAZMYkx6D-yftwX7aWMnJEyARVk99j58r7Qc_Pc/viewform?edit_requested=true#start=embed"  frameborder=0 scrolling="yes"></iframe>
         </div>

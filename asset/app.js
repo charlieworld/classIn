@@ -2,6 +2,14 @@ new Vue({
   el: '#app',
   data: function () {
     return {
+      window: {
+        width: 0,
+        height: 0
+      },
+      mobileWidth: 768,
+      mFilterVisible: false,
+      mOrderVisible: false,
+      mSearchVisible: false,
       sourceData: {},
       mainData: [],
       currentData: [],
@@ -33,6 +41,9 @@ new Vue({
     }
   },
   created: function () {
+    window.addEventListener('resize', this.handleResize)
+    this.handleResize();
+
     let path = window.location.pathname;
     path = path.split('/')[1];
     if (path === 'view')
@@ -42,8 +53,28 @@ new Vue({
     } else {
       this.loading = false;
     }
+
+    this.parseURLSearch();
+    this.geData();
+  },
+  destroyed() {
+    window.removeEventListener('resize', this.handleResize)
   },
   methods: {
+    handleResize() {
+      this.window.width = window.innerWidth;
+      this.window.height = window.innerHeight;
+    },
+    mobile() {
+      if ( this.window.width <= this.mobileWidth ) {
+        return true;
+      } else {
+        return false;
+      }
+    },
+    dialogClose(done) {
+      done();
+    },
     geData() {
       axios({
         method: 'get',
@@ -60,6 +91,7 @@ new Vue({
         //this.currentData = this.mainData.slice(0,this.pageLimit);
         this.$message({
           showClose: true,
+          center: true,
           message: '更新資料成功！',
         })
         this.loading = false;
@@ -188,6 +220,10 @@ new Vue({
     onSearch(){
       this.updateURLSearch();
       //this.doSearch();
+    },
+    onSearchM(){
+      this.mSearchVisible = false;
+      onSearch();
     },
     doSearch(){
       if (this.searchVal === '') {

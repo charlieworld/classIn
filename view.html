@@ -19,7 +19,7 @@
 <!-- icon Front -->
 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous">
 <!-- custom css -->
-<link rel="stylesheet" href="./asset/style.css?ver=1.2.2">
+<link rel="stylesheet" href="./asset/style.css?ver=1.5">
 <meta property="og:title" content="ClassIn | 專屬輔大人的修課經驗交流平台"/>
 <meta property="og:description" content="專屬輔大學生的修課評價網站，來看看學長姐們對於不同課程的評價、也分享你這學期所修的課吧！" />
 <meta property="og:image" content="./asset/og_cover.jpg"/>
@@ -31,23 +31,23 @@
   <div id="app">
     <el-container>
         <el-header class="head fixed">
-            <el-row :gutter="20">
-              <el-col :span="12" style="margin-top: 12px;">
-                <a href="./"><img src="./asset/logo_header.svg" style="height:36px;"></a> 
-              </el-col>
-              <el-col :span="3" :offset="6">
-                <el-button plain round 
-                  class="c-full c-btn-head c-btn-head-active">查看評價</el-button>
-              </el-col>
-              <el-col :span="3">
-                <el-button plain round 
-                  class="c-full c-btn-head"
-                  @click="window.location.href='./add'">新增評價</el-button>
-              </el-col>
-            </el-row>
+            <a href="./"><img src="./asset/logo_header.svg" style="height:36px; margin-top: 11px;"></a>
         </el-header>
-        <div class="fixed" style="top:60px;">
-          <el-row :gutter="20" class="filter_bar" >
+        <div class="head-right-menu fixed " v-if="!mobile()">
+          <el-button plain round class=" c-btn-head c-btn-head-active">查看評價</el-button>
+          <el-button plain round class=" c-btn-head" @click="window.location.href='./add'">新增評價</el-button>
+        </div>
+        <div class="m-head-right-menu" v-else>
+          <a href="./view"><div class="m-head-right-menu-br m-right-menu-active"><i class="fas fa-eye"></i></div></a>
+          <a href="./add"><div class="m-head-right-menu-br"><i class="fas fa-pen-fancy"></i></div></a>
+        </div>
+        <div class="m-head-right-menu m-filter-bar">
+          <div class="m-head-right-menu-br" @click="mFilterVisible = true"><i class="fas fa-filter"></i></div>
+          <div class="m-head-right-menu-br" @click="mOrderVisible = true"><i class="fas fa-sort"></i></div>
+          <div class="m-head-right-menu-br" @click="mSearchVisible = true"><i class="fas fa-search"></i></div>
+        </div>
+        <div class="fixed" style="top:60px;" v-if="!mobile()">
+          <el-row :gutter="20" class="filter_bar">
             <template v-for="item of filters">
                 <el-col :span="3">
                   <el-button 
@@ -61,13 +61,15 @@
                 </el-col>
             </template>
             <el-col :span="6">
-              <el-input placeholder="評價編號、課程名稱或教師姓名" v-model="searchVal" @change="onSearch()" class="input-with-select c-full">
-                <el-button slot="append" icon="el-icon-search" @click="onSearch()"></el-button>
-              </el-input>                
+              <el-tooltip class="item" effect="dark" content="評價編號、課程名稱或教師姓名" placement="left">
+                <el-input placeholder="評價編號、課程名稱或教師姓名" v-model="searchVal" @change="onSearch()" class="input-with-select c-full">
+                  <el-button slot="append" icon="el-icon-search" @click="onSearch()"></el-button>
+                </el-input>    
+              </el-tooltip>            
             </el-col>
           </el-row>
         </div>
-        <div class="order_bar_br fixed">
+        <div class="order_bar_br fixed" v-if="!mobile()">
           <el-row :gutter="10" class="order_bar">
             <el-col :span="3" class="order_bar_title">
                 排序依照：               
@@ -88,7 +90,7 @@
           <div v-if="!loading">
             <template v-for="(item, index) of currentData">
               <el-row class="card card_bar">
-                <el-col :span="3">
+                <el-col :xs="8" :sm="8" :md="4" :lg="3">
                   <div class="class_items_head_title"># {{item.index}}</div>
                   <br/>
                   <div>{{item.studyTime}}</div>
@@ -97,7 +99,7 @@
                   <div>{{item.classType}}</div>
                   <div v-if="item.ifHistory=='是'">（歷史）</div>
                 </el-col>
-                <el-col :span="6">
+                <el-col :xs="10" :sm="10" :md="7" :lg="6">
                   <div class="class_items_head_title">{{item.className}}</div>
                   <div class="class_items">
                     <!-- 收穫多少 -->
@@ -169,7 +171,7 @@
                     </el-row>
                   </div>
                 </el-col>
-                <el-col :span="6">
+                <el-col :xs="6" :sm="6" :md="5" :lg="6">
                   <div class="class_items_head_title">{{item.teaher}}</div>
                   <div class="class_items">
                     <!-- 講課清晰 -->
@@ -195,7 +197,7 @@
                     </el-row>
                   </div>
                 </el-col>
-                <el-col :span="9">
+                <el-col :xs="24" :sm="24" :md="8" :lg="9">
                   <div style="font-size:1.25rem;margin-top:0.3rem;margin-bottom:0.5rem;">
                     <el-row class="class_items_row">
                         <el-col :lg="8">
@@ -225,9 +227,69 @@
             <i class="fas fa-circle-notch fa-spin 7x loading-icon"></i>
         </div>
     </el-container>
+    <el-dialog
+      title="通識類別："
+      :visible.sync="mFilterVisible"
+      fullscreen = true
+      :before-close="dialogClose">
+      <el-row :gutter="20" class="filter_bar">
+        <template v-for="item of filters">
+            <el-col :span="24">
+              <el-button 
+                plain 
+                class="c-full c-btn c-btn-m" 
+                size="medium"
+                @click="onFilter(item.action)"
+                v-bind:class="{'filter-active': item.active}"
+                >{{item.title}}
+              </el-button>
+            </el-col>
+        </template>
+      </el-row>
+      <span slot="footer" class="dialog-footer">
+        <el-button type="primary" @click="mFilterVisible = false" class="c-full">确 定</el-button>
+      </span>
+    </el-dialog>
+    <el-dialog
+      title="排序依照："
+      :visible.sync="mOrderVisible"
+      fullscreen = true
+      :before-close="dialogClose">
+      <el-row :gutter="20" class="filter_bar">
+        <template v-for="item of orders">
+            <el-col :span="24">
+              <el-button 
+                plain 
+                class="c-full c-btn c-btn-m" 
+                size="medium"
+                @click="onOrder(item.action)"
+                v-bind:class="{'filter-active': item.active}"
+                >{{item.title}}
+              </el-button>
+            </el-col>
+        </template>
+      </el-row>
+      <span slot="footer" class="dialog-footer">
+        <el-button type="primary" @click="mOrderVisible = false" class="c-full">确 定</el-button>
+      </span>
+    </el-dialog>
+    <el-dialog
+      title="搜尋評價編號、課程名稱或教師姓名："
+      :visible.sync="mSearchVisible"
+      width=100vw
+      :before-close="dialogClose">
+      <el-input 
+        placeholder=""
+        v-model="searchVal"
+        class="c-full"
+        style="border-radius:0px;"></el-input>   
+      <span slot="footer" class="dialog-footer">
+        <el-button type="primary" @click="onSearchM()" class="c-full">确 定</el-button>
+      </span>
+    </el-dialog>
   </div> <!-- app -->
 <!-- custom js -->
-<script src="./asset/app.js?ver=1.2.2"></script>
+<script src="./asset/app.js?ver=1.5"></script>
 <!-- Global site tag (gtag.js) - Google Analytics -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=UA-125886689-1"></script>
 <script>
