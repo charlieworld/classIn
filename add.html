@@ -19,7 +19,7 @@
 <!-- icon Front -->
 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous">
 <!-- custom css -->
-<link rel="stylesheet" href="./asset/style.css?ver=1.5.0">
+<link rel="stylesheet" href="./asset/style.css?ver=1.5.5">
 <meta property="og:title" content="ClassIn | 專屬輔大人的修課經驗交流平台"/>
 <meta property="og:description" content="專屬輔大學生的修課評價網站，來看看學長姐們對於不同課程的評價、也分享你這學期所修的課吧！" />
 <meta property="og:image" content="./asset/og_cover.jpg"/>
@@ -33,9 +33,9 @@
         <el-header class="head fixed">
             <a href="./"><img src="./asset/logo_header.svg" style="height:36px; margin-top: 11px;"></a>
         </el-header>
-        <div class="head-right-menu fixed " v-if="!mobile()">
-          <el-button plain round class=" c-btn-head c-btn-head-active">查看評價</el-button>
-          <el-button plain round class=" c-btn-head" @click="window.location.href='./add'">新增評價</el-button>
+        <div class="head-right-menu " v-if="!mobile()">
+          <a href="./view"><el-button plain round class=" c-btn-head ">查看評價</el-button></a>
+          <a href="./add"><el-button plain round class=" c-btn-head c-btn-head-active">新增評價</el-button></a>
         </div>
         <div class="m-head-right-menu" v-else>
           <a href="./view"><div class="m-head-right-menu-br"><i class="fas fa-eye"></i></div></a>
@@ -53,7 +53,7 @@
     </el-container>
   </div> <!-- app -->
 <!-- custom js -->
-<script src="./asset/app.js?ver=1.5.1"></script>
+<script src="./asset/app.js?ver=1.5.6"></script>
 <!-- Global site tag (gtag.js) - Google Analytics -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=UA-125886689-1"></script>
 <script>

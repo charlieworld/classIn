@@ -22,8 +22,10 @@ a:hover, a:active {
   font-size: 20px;	font-weight: 500;
 }
 .head-right-menu {
-  text-align: right;
-  padding-right: 40px;
+  position: fixed;
+  z-index: 100;
+  top:0px;
+  right:10px;
 }
 
 .tags{
