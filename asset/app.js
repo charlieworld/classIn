@@ -35,7 +35,6 @@ new Vue({
   created: function () {
     let path = window.location.pathname;
     path = path.split('/')[1];
-    console.log('path :',path);
     if (path === 'view')
     {
       this.parseURLSearch();
