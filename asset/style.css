@@ -57,7 +57,7 @@ html, body{
 
 .filter_bar{
   background-color: #FFFFFF;
-  border-bottom: RGB(0,0,0,0.12) solid 1px;
+  border-bottom: #E0E0E0 solid 1px;
   padding-top: 10px;
   padding-bottom: 10px;
   padding-left: 10px;
@@ -78,7 +78,7 @@ html, body{
 .order_bar_br{
   background-color: #FFFFFF;
   padding:10px 0px;
-  top:119px;
+  top:121px;
 }
 .order_bar{
   width: 90%;
@@ -137,7 +137,7 @@ html, body{
 }
 
 .card {
-  border-bottom: RGB(0,0,0,0.12) solid 1px;
+  border-bottom: #E0E0E0 solid 1px;
   margin-bottom: 10px;
   padding-bottom: 10px;
 }
@@ -161,7 +161,8 @@ html, body{
   position: fixed;
   font-size: 2rem;
   color: #EB9F9F;
-  background-color: RGB(255,255,255,0.3);
+  background-color: #FFFFFF;
+  opacity: 0.3;
   width: 100vw;
   height: 100vh;
   z-index: 101;

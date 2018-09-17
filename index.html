@@ -23,7 +23,7 @@
 <meta property=”og:description” content="專屬輔大學生的修課評價網站，來看看學長姐們對於不同課程的評價、也分享你這學期所修的課吧！" />
 <meta property=”og:image” content="./asset/og_cover.jpg"/>
 <meta property=”og:url” content="https://classin.info"/>
-<meta property=”og:type” content=”website”/>
+<meta property=”og:type” content="website"/>
 <meta property=”og:site_name” content="ClassIn"/>
 </head>
 <body>
@@ -31,12 +31,13 @@
     <el-container>
         <el-header class="head fixed">
             <el-row :gutter="20">
-              <el-col :span="12" style="margin-top: 14px;">
-                <img src="./asset/logo_header.svg" style="height:36px;">
+              <el-col :span="12" style="margin-top: 12px;">
+                <a href="./"><img src="./asset/logo_header.svg" style="height:36px;"></a>
               </el-col>
               <el-col :span="3" :offset="6">
                 <el-button plain round 
-                  class="c-full c-btn-head c-btn-head-active">查看評價</el-button>
+                  class="c-full c-btn-head"
+                  @click="window.location.href='./view'">查看評價</el-button>
               </el-col>
               <el-col :span="3">
                 <el-button plain round 
@@ -45,177 +46,93 @@
               </el-col>
             </el-row>
         </el-header>
-        <div class="fixed" style="top:64px;">
-          <el-row :gutter="20" class="filter_bar" >
-            <template v-for="item of filters">
-                <el-col :span="3">
-                  <el-button 
-                    plain 
-                    class="c-full c-btn" 
-                    size="medium"
-                    @click="onFilter(item.action)"
-                    v-bind:class="{'filter-active': item.active}"
-                    >{{item.title}}
-                  </el-button>
-                </el-col>
-            </template>
-            <el-col :span="6">
-              <el-input placeholder="評價編號、課程名稱或教師姓名" v-model="searchVal" @change="onSearch()" class="input-with-select c-full">
-                <el-button slot="append" icon="el-icon-search" @click="onSearch()"></el-button>
-              </el-input>                
+        <div class="fixed" style="top:60px;height:60px; width:100%; border-bottom: #E0E0E0 solid 1px;"></div>
+        <el-main 
+          style="
+            margin-top: 120px;
+            padding-left:15%;
+            padding-right:15%;
+            padding-bottom: 50px;
+            color:#4A4A4A;	
+            font-size:16px;
+            line-height: 26px;
+            height:85vh;
+            border: #4A4A4A solid 1px;
+          ">
+          <el-row>
+            <el-col :span="24">
+              <p>
+                這是專屬輔大人的課程經驗分享平台，終於在講著要改版的兩年後改版了，站長本人已經畢業，對於學校的課程狀態也已經不甚熟悉，但學長姐曾經留下來的經驗值得繼續被傳承，所以就依然把資訊留在這邊給大家查詢囉！<br/>
+                曾經受益於這裡的學弟妹們也請別忘了在修完課的時候，把你的想法留下來，讓之後的學弟妹們能繼續享用你的「故事」！
+              </p>
             </el-col>
           </el-row>
-        </div>
-        <div class="order_bar_br fixed">
-          <el-row :gutter="10" class="order_bar">
-            <el-col :span="3" class="order_bar_title">
-                排序依照：               
+          <el-row>
+            <el-col :span="24">
+              <p>
+              簡單說明一下網站使用方法：<br/>
+              想要分享自己修課經驗的善心人士們，請從右上角「新增評價」進入，填完表單後就算完成新增！<br/>
+              想要尋找他人經驗的學弟妹，請從「查看評價」進入，利用上方的兩排快速按鈕，就可以簡單找到你有興趣的課程啦，右邊也有搜尋列可以使用，鍵入教師姓名、課程關鍵字，都能找到相關評價！<br/>
+              要是查不到，還請你再修完課後回來跟大家分享唷～
+              </p>
             </el-col>
-            <template v-for="item of orders">
-                <el-col :span="3">
-                  <el-button 
-                    plain class="c-full c-btn-order" 
-                    round size="small"
-                    @click="onOrder(item.action)"
-                    v-bind:class="{'c-btn-order-active': item.active}"
-                    >{{item.title}}</el-button> 
-                </el-col>
-            </template>
           </el-row>
-        </div>
-        <el-main class="review_frame">
-          <div v-if="!loading">
-            <template v-for="(item, index) of currentData">
-              <el-row class="card card_bar">
-                <el-col :span="3">
-                  <div class="class_items_head_title"># {{item.index}}</div>
-                  <br/>
-                  <div>{{item.studyTime}}</div>
-                  <div>{{item.classOpen}}</div>
-                  <div>{{item.section}}</div>
-                  <div>{{item.classType}}</div>
-                  <div v-if="item.ifHistory=='是'">（歷史）</div>
-                </el-col>
-                <el-col :span="6">
-                  <div class="class_items_head_title">{{item.className}}</div>
-                  <div class="class_items">
-                    <!-- 收穫多少 -->
-                    <el-row class="class_items_row">
-                      <el-col :lg="6">
-                        <template v-if="currentOrder == 'learned'">
-                            <div class="text-hightlight"></div>
-                          </template>
-                          <div>{{sourceData.Header.lvLearned}}</div>
-                      </el-col>
-                      <el-col :lg="18">
-                        <i v-for="n in item.lvLearned" class="dot dot-lightA"></i><i v-for="n in (5-item.lvLearned)" class="dot"></i>
-                      </el-col>
-                    </el-row>
-                    <!-- 課程有趣 -->
-                    <el-row class="class_items_row">
-                        <el-col :lg="6">
-                          <template v-if="currentOrder == 'fun'">
-                              <div class="text-hightlight"></div>
-                            </template>
-                            <div>{{sourceData.Header.lvFun}}</div>
-                        </el-col>
-                        <el-col :lg="18">
-                          <i v-for="n in item.lvFun" class="dot dot-lightA"></i><i v-for="n in (5-item.lvFun)" class="dot"></i>
-                        </el-col>
-                      </el-row>
-                    <!-- 作業量 -->
-                    <el-row class="class_items_row">
-                      <el-col :lg="6">
-                        <template v-if="currentOrder == 'work'">
-                            <div class="text-hightlight"></div>
-                          </template>
-                          <div>{{sourceData.Header.lvWork}}</div>
-                      </el-col>
-                      <el-col :lg="18">
-                        <i v-for="n in item.lvWork" class="dot dot-lightB"></i><i v-for="n in (5-item.lvWork)" class="dot"></i>
-                      </el-col>
-                    </el-row>
-                    <!-- 作業類型 -->
-                    <el-row class="class_items_row">
-                      <el-col>
-                        <el-tag v-if="item.ifOtherWork!='無' && item.ifOtherWork=='有'" color="#A79C8E" class="c-tag">{{sourceData.Header.ifOtherWork}}</el-tag>
-                        <el-tag v-else-if="item.ifOtherWork!='無' && item.ifOtherWork!=null" color="#A79C8E" class="c-tag">{{item.ifOtherWork}}</el-tag>
-                        <el-tag v-if="item.ifPersonalReport=='有'" color="#A79C8E" class="c-tag">{{sourceData.Header.ifPersonalReport}}</el-tag>
-                        <el-tag v-if="item.ifGroupReport=='有'" color="#A79C8E" class="c-tag">{{sourceData.Header.ifGroupReport}}</el-tag>
-                      </el-col>
-                    </el-row>
-                    <!-- 考試量 -->
-                    <el-row class="class_items_row">
-                      <el-col :lg="6">
-                        <template v-if="currentOrder == 'exam'">
-                            <div class="text-hightlight"></div>
-                          </template>
-                          <div>{{sourceData.Header.lvExamAmount}}</div>
-                      </el-col>
-                      <el-col :lg="18">
-                        <i v-for="n in item.lvExamAmount" class="dot dot-lightB"></i><i v-for="n in (5-item.lvExamAmount)" class="dot"></i>
-                      </el-col>
-                    </el-row>
-                    <!-- 考試類型 -->
-                    <el-row class="class_items_row">
-                      <el-col>
-                        <el-tag v-if="item.ifOtherExam!='無' && item.ifOtherExam=='有'" color="#A79C8E" class="c-tag">{{sourceData.Header.ifOtherExam}}</el-tag>
-                        <el-tag v-else-if="item.ifOtherExam!='無' && item.ifOtherExam!=null" color="#A79C8E" class="c-tag">{{item.ifOtherExam}}</el-tag>
-                        <el-tag v-if="item.ifSmallExam=='有'" color="#A79C8E" class="c-tag">{{sourceData.Header.ifSmallExam}}</el-tag>
-                        <el-tag v-if="item.ifMidExam=='有'" color="#A79C8E" class="c-tag">{{sourceData.Header.ifMidExam}}</el-tag>
-                        <el-tag v-if="item.ifFinalExam=='有'" color="#A79C8E" class="c-tag">{{sourceData.Header.ifFinalExam}}</el-tag>
-                      </el-col>
-                    </el-row>
-                  </div>
-                </el-col>
-                <el-col :span="6">
-                  <div class="class_items_head_title">{{item.teaher}}</div>
-                  <div class="class_items">
-                    <!-- 講課清晰 -->
-                    <el-row class="class_items_row">
-                      <el-col :lg="6">
-                        <div>{{sourceData.Header.lvTeachlear}}</div>
-                      </el-col>
-                      <el-col :lg="18">
-                        <i v-for="n in item.lvTeachlear" class="dot dot-lightA"></i><i v-for="n in (5-item.lvTeachlear)" class="dot"></i>
-                      </el-col>
-                    </el-row>
-                    <!-- 老師要求 -->
-                    <el-row class="class_items_row">
-                      <el-col :lg="6">
-                        <template v-if="currentOrder == 'request'">
-                            <div class="text-hightlight"></div>
-                          </template>
-                          <div>{{sourceData.Header.lvRequest}}</div>
-                      </el-col>
-                      <el-col :lg="18">
-                        <i v-for="n in item.lvRequest" class="dot dot-lightB"></i><i v-for="n in (5-item.lvRequest)" class="dot"></i>
-                      </el-col>
-                    </el-row>
-                  </div>
-                </el-col>
-                <el-col :span="9">
-                  <div style="font-size:1.25rem;margin-top:0.3rem;margin-bottom:0.5rem;">
-                    <el-row class="class_items_row">
-                        <el-col :lg="8">
-                            <i v-for="n in Number(item.lv_recommend)" class="fas fa-heart heart-margn" style="color:#EB9F9F"></i>
-                        </el-col>
-                        <el-col :lg="16">
-                          {{item.createDate}}
-                        </el-col>
-                      </el-row>
-                  </div>
-                  <div>{{item.message}}</div>
-                </el-col>
-              </el-row>
-            </template>
-            <div class="more_frame" v-if="ifMore">
-              <el-button plain round class="c-full c-btn-more" style="max-width:600px;" @click="more()">顯示更多</el-button>
-            </div>
-            <div class="more_frame" style="color:#A79C8E" v-else>
-              <h5>-- 沒有更多資料惹 --</h5>
-            </div>
-          </div>
+          <el-row style="margin-top:16px;">
+            <el-col :span="24">
+                每筆評價中都有下面三種標示：
+            </el-col>
+          </el-row>
+          <el-row>
+            <el-col :span="4">1. 愛心標示</el-col>
+            <el-col :span="20">
+              <i class="fas fa-heart heart-margn" style="color:#EB9F9F"></i>
+              <i class="fas fa-heart heart-margn" style="color:#EB9F9F"></i>
+              <i class="fas fa-heart heart-margn" style="color:#EB9F9F"></i>
+              <i class="fas fa-heart heart-margn" style="color:#EB9F9F"></i>
+              <i class="fas fa-heart heart-margn" style="color:#EB9F9F"></i>
+            </el-col>
+            <el-col :span="24">
+              代表這筆評價對這門課的總推薦程度，如果你只想知道「到底推不推啊這們課？」看愛心數量就對囉！
+            </el-col>
+          </el-row>
+          <el-row>
+            <el-col :span="4">2. 粉色點點</el-col>
+            <el-col :span="20">
+              <i class="dot dot-lightA"></i>
+              <i class="dot dot-lightA"></i>
+              <i class="dot dot-lightA"></i>
+              <i class="dot dot-lightA"></i>
+              <i class="dot"></i>
+            </el-col>
+            <el-col :span="24">
+              代表這個細項的個別分數，通常越多粉色點代表上課越愉快
+            </el-col>
+          </el-row>
+          <el-row style="margin-bottom:16px;">
+            <el-col :span="4">3. 咖啡色點點</el-col>
+            <el-col :span="20">
+              <i class="dot dot-lightB"></i>
+              <i class="dot dot-lightB"></i>
+              <i class="dot dot-lightB"></i>
+              <i class="dot dot-lightB"></i>
+              <i class="dot"></i>
+            </el-col>
+            <el-col :span="24">
+              代表這個細項的個別分數，通常越少咖啡點代表課程loading越少
+            </el-col>
+          </el-row>
+          <el-row>
+            <el-col>
+              <p>
+                學長姊們的分享幾乎都是掏心掏肺，如果你真的很懶得看文字的話，數這些點點、愛心是可以提供你不少資訊的唷！<br/>
+                請大家盡情享用吧！<br/>
+                <br/>
+                By 站長 2018.09
+              </p>      
+            </el-col>
+          </el-row>
+
+         
         </el-main>
         <el-footer class="fixed footer" height=40>
           2018 weiliewonka 
