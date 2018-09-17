@@ -53,9 +53,6 @@ new Vue({
     } else {
       this.loading = false;
     }
-
-    this.parseURLSearch();
-    this.geData();
   },
   destroyed() {
     window.removeEventListener('resize', this.handleResize)
