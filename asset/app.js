@@ -35,13 +35,13 @@ new Vue({
   created: function () {
     let path = window.location.pathname;
     path = path.split('/')[1];
-      if (!path && path !== undefined && path !== null)
-      {
-        this.parseURLSearch();
-        this.geData();
-      } else {
-        this.loading = false;
-      }
+    if (path === 'view')
+    {
+      this.parseURLSearch();
+      this.geData();
+    } else {
+      this.loading = false;
+    }
   },
   methods: {
     geData() {
