@@ -220,7 +220,7 @@ new Vue({
     },
     onSearchM(){
       this.mSearchVisible = false;
-      onSearch();
+      this.onSearch();
     },
     doSearch(){
       if (this.searchVal === '') {
