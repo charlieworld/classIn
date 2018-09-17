@@ -7,7 +7,7 @@
 <meta name="author" content="ClassIn"/>
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
-<link rel="shortcut icon" type="image/x-icon" href="favicon.ico?v=2">
+<link rel="shortcut icon" type="image/x-icon" href="favicon.png?v=1.2">
 <!-- production version, optimized for size and speed -->
 <script src="https://cdn.jsdelivr.net/npm/vue"></script>
 <!-- axios -->
@@ -17,9 +17,14 @@
 <script src="https://unpkg.com/element-ui/lib/index.js"></script>
 <!-- icon Front -->
 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous">
-
 <!-- custom css -->
 <link rel="stylesheet" href="./asset/style.css">
+<meta property=”og:title” content="ClassIn | 專屬輔大人的修課經驗交流平台"/>
+<meta property=”og:description” content="專屬輔大學生的修課評價網站，來看看學長姐們對於不同課程的評價、也分享你這學期所修的課吧！" />
+<meta property=”og:image” content="./asset/og_cover.jpg"/>
+<meta property=”og:url” content="https://classin.info"/>
+<meta property=”og:type” content=”website”/>
+<meta property=”og:site_name” content="ClassIn"/>
 </head>
 <body>
   <div id="app">
@@ -55,7 +60,7 @@
                 </el-col>
             </template>
             <el-col :span="6">
-              <el-input placeholder="搜尋 評價編號、課程名稱 或 教師姓名" v-model="searchVal" @change="onSearch()" class="input-with-select c-full">
+              <el-input placeholder="評價編號、課程名稱或教師姓名" v-model="searchVal" @change="onSearch()" class="input-with-select c-full">
                 <el-button slot="append" icon="el-icon-search" @click="onSearch()"></el-button>
               </el-input>                
             </el-col>
