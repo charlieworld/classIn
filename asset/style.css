@@ -207,6 +207,7 @@ a:hover, a:active {
   width: 100vw;
   height: 100vh;
   overflow-y:auto;
+  overflow-x: hidden;
   padding-top:180px;
   padding-bottom: 350px;
 }
