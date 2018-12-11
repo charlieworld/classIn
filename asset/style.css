@@ -276,6 +276,9 @@ a:hover, a:active {
     height: 34px;
   }
 
+  .order_bar_br {
+    top: 117px;
+  }
   /*
   .review_frame {
     margin-top: 120px;
