@@ -207,7 +207,7 @@ a:hover, a:active {
   width: 100vw;
   height: 100vh;
   overflow-y:auto;
-  margin-top:180px;
+  padding-top:180px;
   padding-bottom: 350px;
 }
 .more_frame{
@@ -257,6 +257,8 @@ a:hover, a:active {
   font-size: 14px;
   font-weight: 300;
   margin-bottom: 5px;
+  white-space: normal;
+  height: auto;
 }
 
 
