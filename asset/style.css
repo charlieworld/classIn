@@ -275,14 +275,16 @@ a:hover, a:active {
   .el-input__inner{ 
     height: 34px;
   }
+
+  /*
   .review_frame {
     margin-top: 120px;
-  }
+  }*/
 }
 
 @media only screen and (max-width: 768px) {
   .review_frame {
-    margin-top: 60px;
+    margin-top: 115px;
   }
   .m-head-right-menu {
     position: fixed;
