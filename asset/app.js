@@ -141,7 +141,6 @@ new Vue({
           break;
       }
       this.currentFilter = option;
-      //console.log('data length :',this.mainData.length);
     },
     doFilter(keyWord) {
       this.mainData = this.sourceData.Data.filter(data => data.classOpen.indexOf(keyWord) >= 0 );
@@ -201,8 +200,8 @@ new Vue({
             return itemA - itemB;
             break;  
           default:
-            itemA = a.createDate;
-            itemB = b.createDate
+            itemA = a.index;
+            itemB = b.index
             if (itemA > itemB) {
               return -1;
             }
@@ -212,6 +211,7 @@ new Vue({
             return 0;
             break;
         }
+       
       });
     },
     onSearch(){
