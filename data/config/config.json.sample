@@ -1,4 +1,0 @@
-{
-  "url": "https://spreadsheets.google.com/feeds/cells/{KEY}/{{SHEET_INDEX}}/public/values?alt=json",
-  "colKeys":
-}
