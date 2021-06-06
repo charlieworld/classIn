@@ -1,22 +1,27 @@
 import styled from 'styled-components';
-import Typography from '@material-ui/core/Typography';
+import theme from '../utils/theme';
 
-const Footer = styled.footer`
+interface themeType {
+  background: string;
+  text: string;
+}
+
+const Footer = styled.footer<{ theme: themeType }>`
   width: 100vw;
   position: fixed;
   z-index: 100;
   bottom: 0;
-  background-color: #F8ECC9;
+  background-color: ${props => props.theme.background};
+  color: ${props => props.theme.text};
   padding: 0.5rem 0;
+  text-align: center;
 `;
 
 export default function FooterComponent() {
 
   return (
-    <Footer>
-      <Typography color="textSecondary"align="center">
-        2018 Made by @Weilie with ❤️
-      </Typography>
+    <Footer theme={theme.footer}>
+      2018 Made by @Weilie with ❤️
     </Footer>
   );
 }
