@@ -20,6 +20,8 @@ export default function MainLayout(props: { children: React.ReactNode; }) {
         <meta property="og:url" content="https://classin.info"/>
         <meta property="og:type" content="website"/>
         <meta property="og:site_name" content="ClassIn"/>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap" />
+        <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons" />
       </Head>
       {children}
       <Footer />
