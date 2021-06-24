@@ -5,7 +5,7 @@ export default function MainLayout(props: { children: React.ReactNode }) {
   const { children } = props;
 
   return (
-    <div id="main">
+    <div id="main" className="text-gray-800">
       <Head>
         <title>ClassIn | 專屬輔大人的修課經驗交流平台</title>
         <meta httpEquiv="pragma" content="no-cache"></meta>
