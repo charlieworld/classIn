@@ -1,7 +1,8 @@
+import { ReactChildren, ReactChild } from 'react';
 import Head from 'next/head';
 import Footer from './Footer';
 
-export default function MainLayout(props: { children: React.ReactNode }) {
+export default function MainLayout(props: { children: ReactChildren | ReactChild }) {
   const { children } = props;
 
   return (
