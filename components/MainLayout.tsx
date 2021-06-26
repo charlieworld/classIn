@@ -33,7 +33,7 @@ export default function MainLayout(props: { children: ReactChildren | ReactChild
         <meta property="og:site_name" content="ClassIn" />
       </Head>
       <Header />
-      <div className="flex justify-center py-28 px-10 ">
+      <div className="flex justify-center py-24 px-10 ">
         {children}
       </div>
       <Footer />
