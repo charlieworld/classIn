@@ -1,12 +1,13 @@
 import { ReactChildren, ReactChild } from 'react';
 import Head from 'next/head';
+import Header from './Header/Header';
 import Footer from './Footer';
 
 export default function MainLayout(props: { children: ReactChildren | ReactChild }) {
   const { children } = props;
 
   return (
-    <div id="main" className="text-gray-800">
+    <div id="main" className="text-gray-600 font-sans leading-7 tracking-wider">
       <Head>
         <title>ClassIn | 專屬輔大人的修課經驗交流平台</title>
         <meta httpEquiv="pragma" content="no-cache"></meta>
@@ -30,16 +31,11 @@ export default function MainLayout(props: { children: ReactChildren | ReactChild
         <meta property="og:url" content="https://classin.info" />
         <meta property="og:type" content="website" />
         <meta property="og:site_name" content="ClassIn" />
-        <link
-          rel="stylesheet"
-          href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap"
-        />
-        <link
-          rel="stylesheet"
-          href="https://fonts.googleapis.com/icon?family=Material+Icons"
-        />
       </Head>
-      {children}
+      <Header />
+      <div className="flex justify-center py-28 px-10 ">
+        {children}
+      </div>
       <Footer />
     </div>
   );
