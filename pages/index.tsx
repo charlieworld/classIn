@@ -8,7 +8,7 @@ export default function Index() {
 
   return (
     <MainLayout>
-      <main className="w-full md:max-w-3xl lg:max-w-5xl">
+      <main className="py-24 px-10 w-full md:max-w-3xl lg:max-w-5xl">
         <h1 className="text-2xl mb-1">關於 ClassIn</h1>
         <h3 className="text-lg mb-4">#輔仁大學 #輔大 #選課 #選課分享</h3>
         <section className={S_MARGIN}>

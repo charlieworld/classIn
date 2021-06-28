@@ -3,9 +3,11 @@ import Button from '../Button/Button';
 
 
 const BUTTON_STYLE = 'ml-6 text-white border-white rounded-3xl';
+const BUTTON_ACTIVE_STYLE = 'ml-6 text-primary bg-white border-white rounded-3xl';
 const BUTTON_HOVER_STYLE = [
   'border-primary-dark',
-  'bg-primary-dark'
+  'bg-primary-dark',
+  'text-white'
 ];
 
 const NAV_ITEMS = [
@@ -28,10 +30,18 @@ export default function HeaderNavComponent() {
     const handleOnClick = () => {
       router.push(item.link);
     };
+
+    const isActive = () => router.pathname === item.link;
+
+    const renderClassName = () => {
+      if (isActive()) return BUTTON_ACTIVE_STYLE;
+      return BUTTON_STYLE;
+    }
+
     return (
       <Button 
         key={item.id}
-        customClass={BUTTON_STYLE} 
+        customClass={renderClassName()} 
         hoverStyle={BUTTON_HOVER_STYLE}
         onClick={handleOnClick}
       >
