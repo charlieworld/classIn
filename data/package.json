@@ -4,7 +4,8 @@
   "description": "",
   "main": "factory.js",
   "scripts": {
-    "eslint-init": "eslint --init"
+    "eslint-init": "eslint --init",
+    "go": "node factory.js"
   },
   "author": "Charlieeeee",
   "license": "ISC",
