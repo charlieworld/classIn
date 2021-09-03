@@ -156,7 +156,12 @@
                           <div>{{sourceData.Header.lvExamAmount}}</div>
                       </el-col>
                       <el-col :lg="18">
-                        <i v-for="n in item.lvExamAmount" class="dot dot-lightB"></i><i v-for="n in (5-item.lvExamAmount)" class="dot"></i>
+                        <template v-if="item.lvExamAmount==null">
+                          <i v-for="n in 5" class="dot dot-lightB"></i>
+                        </template>
+                        <template v-else>
+                          <i v-for="n in item.lvExamAmount" class="dot dot-lightB"></i><i v-for="n in (5-item.lvExamAmount)" class="dot"></i>
+                        </template>
                       </el-col>
                     </el-row>
                     <!-- 考試類型 -->

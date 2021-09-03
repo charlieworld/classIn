@@ -54,11 +54,7 @@ async function run() {
       index: classIndex + 1,
     };
     HEADER_KEYS.forEach((key, index) => {
-      if (key === 'lvExamAmount') {
-        tObj[key] = Number(item[index]);
-      } else {
-        tObj[key] = item[index];
-      }
+      tObj[key] = item[index];
     });
     outputData.Data.push(tObj);
   });
