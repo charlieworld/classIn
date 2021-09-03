@@ -1,3 +1,4 @@
+/* eslint-disable operator-linebreak */
 const fetch = require('node-fetch');
 const fs = require('fs');
 const shell = require('shelljs');
@@ -54,7 +55,20 @@ async function run() {
       index: classIndex + 1,
     };
     HEADER_KEYS.forEach((key, index) => {
-      tObj[key] = item[index];
+      if (item[index] === 'null') {
+        tObj[key] = null;
+      } else if (
+        item[index] === '0' ||
+        item[index] === '1' ||
+        item[index] === '2' ||
+        item[index] === '3' ||
+        item[index] === '4' ||
+        item[index] === '5'
+      ) {
+        tObj[key] = Number(item[index]);
+      } else {
+        tObj[key] = item[index];
+      }
     });
     outputData.Data.push(tObj);
   });
