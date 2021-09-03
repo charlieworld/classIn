@@ -93,10 +93,10 @@
                 <el-col :xs="8" :sm="8" :md="4" :lg="3">
                   <div class="class_items_head_title"># {{item.index}}</div>
                   <br/>
-                  <div>{{item.studyTime}}</div>
-                  <div>{{item.classOpen}}</div>
-                  <div>{{item.section}}</div>
-                  <div>{{item.classType}}</div>
+                  <div v-if="item.studyTime!='null'">{{item.studyTime}}</div>
+                  <div v-if="item.classOpen!='null'">{{item.classOpen}}</div>
+                  <div v-if="item.section!='null'">{{item.section}}</div>
+                  <div v-if="item.classType!='null'">{{item.classType}}</div>
                   <div v-if="item.ifHistory=='是'">（歷史）</div>
                 </el-col>
                 <el-col :xs="10" :sm="10" :md="7" :lg="6">
@@ -168,7 +168,7 @@
                     <el-row class="class_items_row">
                       <el-col>
                         <el-tag v-if="item.ifOtherExam!='無' && item.ifOtherExam=='有'" color="#A79C8E" class="c-tag">{{sourceData.Header.ifOtherExam}}</el-tag>
-                        <el-tag v-else-if="item.ifOtherExam!='無' && item.ifOtherExam!=null" color="#A79C8E" class="c-tag">{{item.ifOtherExam}}</el-tag>
+                        <el-tag v-else-if="item.ifOtherExam!='無' && item.ifOtherExam!='null'" color="#A79C8E" class="c-tag">{{item.ifOtherExam}}</el-tag>
                         <el-tag v-if="item.ifSmallExam=='有'" color="#A79C8E" class="c-tag">{{sourceData.Header.ifSmallExam}}</el-tag>
                         <el-tag v-if="item.ifMidExam=='有'" color="#A79C8E" class="c-tag">{{sourceData.Header.ifMidExam}}</el-tag>
                         <el-tag v-if="item.ifFinalExam=='有'" color="#A79C8E" class="c-tag">{{sourceData.Header.ifFinalExam}}</el-tag>
