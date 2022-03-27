@@ -1,0 +1,21 @@
+{
+  "name": "classin_factory",
+  "version": "1.0.0",
+  "description": "",
+  "main": "factory.js",
+  "scripts": {
+    "eslint-init": "eslint --init",
+    "go": "node factory.js"
+  },
+  "author": "Charlieeeee",
+  "license": "ISC",
+  "dependencies": {
+    "node-fetch": "^3.1.1",
+    "shelljs": "^0.8.5"
+  },
+  "devDependencies": {
+    "eslint": "^7.32.0",
+    "eslint-config-airbnb-base": "^14.2.1",
+    "eslint-plugin-import": "^2.24.1"
+  }
+}
