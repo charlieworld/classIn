@@ -1,0 +1,28 @@
+{
+  "url": "https://spreadsheets.google.com/feeds/cells/1aKaEzOVSxhggU_ydTTvlxGID_rkBPIbS9_WZrQVREpo/1/public/values?alt=json",
+  "colKeys": [
+    "createDate",
+    "className",
+    "studyTime",
+    "teaher",
+    "classOpen",
+    "section",
+    "classType",
+    "ifHistory",
+    "lvLearned",
+    "lvFun",
+    "lvWork",
+    "ifGroupReport",
+    "ifPersonalReport",
+    "ifOtherWork",
+    "lvExamAmount",
+    "ifSmallExam",
+    "ifMidExam",
+    "ifFinalExam",
+    "ifOtherExam",
+    "lvTeachlear",
+    "lvRequest",
+    "lv_recommend",
+    "message"
+  ]
+}
