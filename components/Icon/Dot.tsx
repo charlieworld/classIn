@@ -11,7 +11,7 @@ const IconDotComponent = (props: {
   };
   return (
     <div
-      className={`h-6 w-6 border-1 border-transparent	rounded-full ${isActive()} ${customClass}`}
+      className={`h-4 w-4 border-1 border-transparent	rounded-full ${isActive()} ${customClass}`}
     />
   );
 };

@@ -1,6 +1,8 @@
 import styled from 'styled-components';
 import { Title } from '../Common/Typography';
 import CardBlockLvLeft from './CardBlockLvLeft';
+import CardBlockLvRight from './CardBlockLvRight';
+import CardBlockMessage from './CardBlockMessage';
 
 export interface dataInterface {
   index: number;
@@ -64,7 +66,7 @@ export default function Card(props: CardProps) {
 
   return (
     <CardWrapper>
-      <div className="w-40 pr-4">
+      <div className="w-1/5 pr-4">
         <Title>{`# ${index}`}</Title>
         <div>{studyTime || ''}</div>
         <div>{classOpen || ''}</div>
@@ -72,6 +74,8 @@ export default function Card(props: CardProps) {
         <div>{classType || ''}</div>
       </div>
       <CardBlockLvLeft data={data} />
+      <CardBlockLvRight data={data} />
+      <CardBlockMessage data={data} />
     </CardWrapper>
   );
 }

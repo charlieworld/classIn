@@ -1,5 +1,5 @@
 import { dataInterface } from './Card';
-import { Title, SubTitle } from '../Common/Typography';
+import { Title } from '../Common/Typography';
 import Dot from '../Icon/Dot';
 import IconLine from '../Common/IconLine';
 import CardLine from './CardLine';
@@ -27,7 +27,7 @@ export default function CardBlockLvLeft(props: CardBlockLvLeftProps) {
   } = data;
 
   return (
-    <div className='w-72 pr-1'>
+    <div className='w-1/5 pr-1'>
         <Title>{className}</Title>
         <CardLine title="收穫多少">
           <IconLine
