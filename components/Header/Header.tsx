@@ -1,25 +1,37 @@
+import styled from 'styled-components';
 import Image from 'next/image';
-import Link from 'next/link'
+import Link from 'next/link';
 import HeaderNav from './HeaderNav';
 import useViewport from '../../hooks/useViewport';
 
-const HEADER_POSITION = 'fixed top-0'
+const HEADER_POSITION = 'fixed top-0';
 const HEADER_BG = 'bg-primary';
-const HEADER_SHAPE = 'px-4 py-2 w-full flex items-center place-content-between';
+const HEADER_SHAPE = 'w-full flex items-center place-content-between';
 
+const Header = styled.header`
+  height: 4rem;
+  width: 100%;
+  padding: 0.5rem;
+`;
+const ImageWrapper = styled.div`
+  height: 100%;
+  width: 100%;
+  position: relative;
+`;
 
 export default function HeaderComponent() {
   const [viewPort] = useViewport();
   return (
-    <header className={`${HEADER_POSITION} ${HEADER_BG} ${HEADER_SHAPE}`}>
-      <Link href="/" passHref>
-        <a>
-          <Image priority src="/logo_header.svg" height={42} width="auto" />
-        </a>
-      </Link>
-      {
-        (viewPort === 'MOBILE') ? null : <HeaderNav />
-      }
-    </header>
+    <Header className={`${HEADER_POSITION} ${HEADER_BG} ${HEADER_SHAPE}`}>
+      <ImageWrapper>
+        <Link href="/" passHref>
+          <a>
+            <Image priority src="/logo_header.svg" layout="fill" />
+          </a>
+        </Link>
+      </ImageWrapper>
+
+      {viewPort === 'MOBILE' ? null : <HeaderNav />}
+    </Header>
   );
 }

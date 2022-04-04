@@ -1,3 +1,4 @@
+import styled from 'styled-components';
 import { ReactChildren, ReactChild, MouseEventHandler } from 'react';
 
 interface ButtonProps {
@@ -7,7 +8,12 @@ interface ButtonProps {
   onClick: MouseEventHandler<HTMLButtonElement>;
 }
 
-const BUTTON_SHAPE = 'px-8 py-1 border-2 rounded';
+const BUTTON_SHAPE = 'border-2 rounded';
+
+const Button = styled.button`
+  padding: 0.5rem 1rem;
+  width : 8rem;
+`;
 
 export default function ButtonComponent(props: ButtonProps) {
   const {
@@ -23,11 +29,11 @@ export default function ButtonComponent(props: ButtonProps) {
   };
 
   return (
-    <button
+    <Button
       className={`${BUTTON_SHAPE} ${renderHoverStyle()} ${customClass}`}
       onClick={onClick}
     >
       {children}
-    </button>
+    </Button>
   );
 }
