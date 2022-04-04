@@ -3,8 +3,8 @@ import Head from 'next/head';
 import Header from './Header/Header';
 import Footer from './Footer';
 
-export default function MainLayout(props: { children: ReactChildren | ReactChild }) {
-  const { children } = props;
+export default function MainLayout(props: { className?: string, children: ReactChildren | ReactChild }) {
+  const { className = '', children } = props;
 
   return (
     <div id="main" className="text-gray-600 font-sans leading-7 tracking-wider">
@@ -32,8 +32,8 @@ export default function MainLayout(props: { children: ReactChildren | ReactChild
         <meta property="og:type" content="website" />
         <meta property="og:site_name" content="ClassIn" />
       </Head>
-      <Header />
-      <div className="flex justify-center">
+      <Header className={className} />
+      <div className='flex justify-center '>
         {children}
       </div>
       <Footer />

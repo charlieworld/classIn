@@ -1,4 +1,3 @@
-import styled from 'styled-components';
 import { useRouter } from 'next/router'
 import Button from '../Button/Button';
 
@@ -23,10 +22,6 @@ const NAV_ITEMS = [
     link: '/add',
   },
 ];
-
-const Nav = styled.nav`
-  display: flex;
-`;
 
 export default function HeaderNavComponent() {
   const router = useRouter()
@@ -56,8 +51,8 @@ export default function HeaderNavComponent() {
   });
 
   return (
-    <Nav>
+    <nav className='flex'>
       {renderItems()}
-    </Nav>
+    </nav>
   );
 }

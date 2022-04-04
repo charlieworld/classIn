@@ -19,10 +19,11 @@ const ImageWrapper = styled.div`
   position: relative;
 `;
 
-export default function HeaderComponent() {
+export default function HeaderComponent(props: { className?: string}) {
+  const { className = '' } = props;
   const [viewPort] = useViewport();
   return (
-    <Header className={`${HEADER_POSITION} ${HEADER_BG} ${HEADER_SHAPE}`}>
+    <Header className={`${HEADER_POSITION} ${HEADER_BG} ${HEADER_SHAPE} ${className}`}>
       <ImageWrapper>
         <Link href="/" passHref>
           <a>

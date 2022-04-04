@@ -7,8 +7,11 @@ export default function Index() {
   const ICON_MARGIN = 'mb-1';
 
   return (
-    <MainLayout >
-      <main className="w-full h-screen pt-20" style={{ backgroundColor: 'rgb(243, 241, 238)'}}>
+    <MainLayout className="shadow">
+      <main
+        className="w-full h-screen pt-16 "
+        style={{ backgroundColor: 'rgb(243, 241, 238)' }}
+      >
         <iframe
           className="w-full h-screen"
           src="https://docs.google.com/forms/d/19u2KhAZMYkx6D-yftwX7aWMnJEyARVk99j58r7Qc_Pc/viewform?edit_requested=true#start=embed"
