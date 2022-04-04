@@ -13,7 +13,7 @@ export default function CardBlockMessage(props: CardBlockMessageProps) {
   const { lv_recommend, createDate, message } = data;
 
   return (
-    <div className="w-2/5">
+    <div className="w-4/12">
       <div className="flex items-center justify-between w-full">
         <IconLine
           active={lv_recommend}

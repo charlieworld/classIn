@@ -1,6 +1,7 @@
 import { dataInterface } from './Card';
 import { Title } from '../Common/Typography';
-import Dot from '../Icon/Dot';
+import Sparkles from '../Icon/Sparkles';
+import Clock from '../Icon/Clock';
 import IconLine from '../Common/IconLine';
 import CardLine from './CardLine';
 import Tag from '../Common/Tag';
@@ -27,30 +28,30 @@ export default function CardBlockLvLeft(props: CardBlockLvLeftProps) {
   } = data;
 
   return (
-    <div className='w-1/5 pr-1'>
+    <div className='w-3/12 pr-2'>
         <Title>{className}</Title>
         <CardLine title="收穫多少">
           <IconLine
             active={lvLearned}
             total={5}
-            icon={<Dot />}
-            iconActive={<Dot active />}
+            icon={<Sparkles />}
+            iconActive={<Sparkles active />}
           />
         </CardLine>
         <CardLine title="課程有趣">
           <IconLine
             active={lvFun}
             total={5}
-            icon={<Dot />}
-            iconActive={<Dot active />}
+            icon={<Sparkles />}
+            iconActive={<Sparkles active />}
           />
         </CardLine>
         <CardLine title="作業量">
           <IconLine
             active={lvWork}
             total={5}
-            icon={<Dot secondary />}
-            iconActive={<Dot active secondary />}
+            icon={<Clock />}
+            iconActive={<Clock active />}
           />
         </CardLine>
         {ifOtherWork && ifOtherWork !== '無' ? (
@@ -62,8 +63,8 @@ export default function CardBlockLvLeft(props: CardBlockLvLeftProps) {
           <IconLine
             active={lvExamAmount}
             total={5}
-            icon={<Dot secondary />}
-            iconActive={<Dot active secondary />}
+            icon={<Clock />}
+            iconActive={<Clock active />}
           />
         </CardLine>
         <div className="flex items-center">

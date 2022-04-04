@@ -66,7 +66,7 @@ export default function Card(props: CardProps) {
 
   return (
     <CardWrapper>
-      <div className="w-1/5 pr-4">
+      <div className="w-2/12 pr-2">
         <Title>{`# ${index}`}</Title>
         <div>{studyTime || ''}</div>
         <div>{classOpen || ''}</div>

@@ -1,6 +1,7 @@
 import { dataInterface } from './Card';
 import { Title } from '../Common/Typography';
-import Dot from '../Icon/Dot';
+import Sparkles from '../Icon/Sparkles';
+import Clock from '../Icon/Clock';
 import IconLine from '../Common/IconLine';
 import CardLine from './CardLine';
 
@@ -19,22 +20,22 @@ export default function CardBlockLvRight(props: CardBlockLvRightProps) {
   } = data;
 
   return (
-    <div className='w-1/5 pr-1'>
+    <div className='w-3/12 pr-2'>
         <Title>{teaher}</Title>
         <CardLine title="講課清晰">
           <IconLine
             active={lvTeachlear}
             total={5}
-            icon={<Dot />}
-            iconActive={<Dot active />}
+            icon={<Sparkles />}
+            iconActive={<Sparkles active />}
           />
         </CardLine>
         <CardLine title="教師要求">
           <IconLine
             active={lvRequest}
             total={5}
-            icon={<Dot secondary />}
-            iconActive={<Dot secondary active />}
+            icon={<Clock />}
+            iconActive={<Clock active />}
           />
         </CardLine>
       </div>

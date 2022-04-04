@@ -6,12 +6,11 @@ import useViewport from '../../hooks/useViewport';
 
 const HEADER_POSITION = 'fixed top-0';
 const HEADER_BG = 'bg-primary';
-const HEADER_SHAPE = 'w-full flex items-center place-content-between';
+const HEADER_SHAPE = 'w-full flex items-center place-content-between py-1 px-10';
 
 const Header = styled.header`
   height: 4rem;
   width: 100%;
-  padding: 0.5rem;
 `;
 const ImageWrapper = styled.div`
   height: 100%;
