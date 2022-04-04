@@ -1,7 +1,15 @@
+import styled from 'styled-components';
 import MainLayout from '../components/MainLayout';
 import Heart from '../components/Icon/Heart';
 import Sparkles from '../components/Icon/Sparkles';
 import Clock from '../components/Icon/Clock';
+
+
+const TestDiv = styled.div`
+  font-size: 18px;
+  color: green;
+`
+
 export default function Index() {
   const S_MARGIN = 'mb-6';
   const ICON_MARGIN = 'mb-1';
@@ -9,6 +17,7 @@ export default function Index() {
   return (
     <MainLayout>
       <main className="py-24 px-10 w-full md:max-w-3xl lg:max-w-5xl">
+        <TestDiv>test</TestDiv>
         <h1 className="text-2xl mb-1">關於 ClassIn</h1>
         <h3 className="text-lg mb-4">#輔仁大學 #輔大 #選課 #選課分享</h3>
         <section className={S_MARGIN}>
