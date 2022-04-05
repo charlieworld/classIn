@@ -1,5 +1,6 @@
 import styled from 'styled-components';
 import { ReactNode } from 'react';
+import { nanoid } from 'nanoid'
 
 const Wrapper = styled.div`
   div {
@@ -24,8 +25,8 @@ export default function IconLine(props: DotLineProps) {
     const tArr = Array(total).fill(0);
 
     const t = tArr.map((_, index) => {
-      if (index < active) return <>{iconActive}</>;
-      return <>{icon}</>;
+      if (index < active) return <div key={nanoid()}>{iconActive}</div>;
+      return <div key={nanoid()}>{icon}</div>;
     });
     return t;
   };

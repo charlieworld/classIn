@@ -7,7 +7,7 @@ export default function MainLayout(props: { className?: string, children: ReactC
   const { className = '', children } = props;
 
   return (
-    <div id="main" className="text-gray-600 font-sans leading-7 tracking-wider">
+    <div id="main" className="text-gray-600 font-sans leading-7 tracking-wider pm-20">
       <Head>
         <title>ClassIn | 專屬輔大人的修課經驗交流平台</title>
         <meta httpEquiv="pragma" content="no-cache"></meta>
@@ -33,7 +33,7 @@ export default function MainLayout(props: { className?: string, children: ReactC
         <meta property="og:site_name" content="ClassIn" />
       </Head>
       <Header className={className} />
-      <div className='flex justify-center '>
+      <div className='flex justify-center'>
         {children}
       </div>
       <Footer />

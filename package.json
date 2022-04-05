@@ -12,6 +12,7 @@
   "dependencies": {
     "@heroicons/react": "^1.0.1",
     "lodash": "^4.17.21",
+    "nanoid": "^3.3.2",
     "next": "12",
     "react": "^18.0.0",
     "react-dom": "^18.0.0",
