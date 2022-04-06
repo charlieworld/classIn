@@ -5,7 +5,7 @@ interface ButtonProps {
   children: ReactChild | ReactChildren;
   customClass?: string;
   hoverStyle?: string[];
-  onClick: MouseEventHandler<HTMLButtonElement>;
+  onClick?: MouseEventHandler<HTMLButtonElement>;
 }
 
 const BUTTON_SHAPE = 'border-2 rounded';
