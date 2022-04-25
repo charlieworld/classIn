@@ -1,11 +1,14 @@
 import styled from 'styled-components';
 import Button from '../Button/Button';
-import SearchBar from './SearchBar';
 
 const SHAPE =
-  'w-full flex items-center place-content-between py-1';
+  'w-full max-w-6xl flex items-center place-content-between py-1 bg-green-200';
 
-const FilterButton = styled(Button)`
+const Title = styled.div`
+  font-weight: bold;
+`;
+
+const OrderByButton = styled(Button)`
   font-weight: bold;
 `;
 
@@ -40,7 +43,7 @@ const ORDER_BY = [
   },
 ];
 
-export default function FilterBar(props: {
+export default function OrderByBar(props: {
   className?: string;
   value: string;
   onChange: Function;
@@ -49,9 +52,9 @@ export default function FilterBar(props: {
 
   const renderOrder = () =>
     ORDER_BY.map((b) => {
-      let cClass = 'border-primary text-primary rounded-md';
+      let cClass = 'border-secondary rounded-3xl';
       if (value === b.value) {
-        cClass = 'border-primary rounded-sm bg-primary text-white';
+        cClass = 'border-secondary rounded-3xl bg-secondary text-white';
       }
 
       const handleChange = () => {
@@ -59,16 +62,20 @@ export default function FilterBar(props: {
       };
 
       return (
-        <FilterButton customClass={cClass} key={b.value} onClick={handleChange}>
+        <OrderByButton
+          customClass={cClass}
+          key={b.value}
+          onClick={handleChange}
+        >
           {b.text}
-        </FilterButton>
+        </OrderByButton>
       );
     });
 
   return (
     <div className={`${SHAPE} ${className}`}>
+      <Title>排序依照：</Title>
       {renderOrder()}
-      <SearchBar />
     </div>
   );
 }

@@ -5,6 +5,7 @@ import Loading from '../components/Icon/Loading';
 import useData from '../hooks/useData';
 import Card from '../components/Card/Card';
 import IconExclamation from '../components/Icon/Exclamation';
+import OrderByBar from '../components/OrderByBar/OrderByBar';
 import FilterBar from '../components/FilterBar/FilterBar';
 
 const MESSAGE_CLASS_NAME = 'w-full flex justify-center items-center h-1/2 mt-8';
@@ -59,8 +60,12 @@ export default function Index() {
 
   return (
     <MainLayout>
-      <main className="w-full max-w-7xl py-24 px-10">
-        <FilterBar value={order} onChange={handleChange} />
+      <main className="w-full max-w-7xl py-60 px-10 ">
+        <div className="fixed z-10 top-16 bg-white w-full left-0 py-4 px-10 shadow-lg flex flex-col items-center	">
+          <FilterBar value={order} onChange={handleChange} />
+          <div className="border-b-2 my-2 border-gray-100 w-full" />
+          <OrderByBar value={order} onChange={handleChange} />
+        </div>
         {renderCards()}
       </main>
     </MainLayout>

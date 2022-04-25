@@ -4,7 +4,7 @@ import Link from 'next/link';
 import HeaderNav from './HeaderNav';
 import useViewport from '../../hooks/useViewport';
 
-const HEADER_POSITION = 'fixed top-0';
+const HEADER_POSITION = 'fixed top-0 z-10';
 const HEADER_BG = 'bg-primary';
 const HEADER_SHAPE = 'w-full flex items-center place-content-between py-1 px-10';
 
