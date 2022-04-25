@@ -22,7 +22,7 @@ export default function HeaderComponent(props: { className?: string}) {
   const { className = '' } = props;
   const [viewPort] = useViewport();
   return (
-    <Header className={`${HEADER_POSITION} ${HEADER_BG} ${HEADER_SHAPE} ${className}`}>
+    <Header id="header" className={`${HEADER_POSITION} ${HEADER_BG} ${HEADER_SHAPE} ${className}`}>
       <ImageWrapper>
         <Link href="/" passHref>
           <a>

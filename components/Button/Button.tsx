@@ -8,10 +8,10 @@ interface ButtonProps {
   onClick?: MouseEventHandler<HTMLButtonElement>;
 }
 
-const BUTTON_SHAPE = 'border-2 rounded';
+const BUTTON_SHAPE = 'border-2 rounded-3xl';
 
 const Button = styled.button`
-  padding: 0.5rem 1rem;
+  padding: 0.2rem 0.5rem;
   width : 8rem;
 `;
 

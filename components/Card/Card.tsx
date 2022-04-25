@@ -53,15 +53,6 @@ export default function Card(props: CardProps) {
     classOpen,
     section,
     classType,
-    lvLearned,
-    lvFun,
-    lvWork,
-    ifOtherWork,
-    lvExamAmount,
-    ifSmallExam,
-    ifMidExam,
-    ifFinalExam,
-    ifOtherExam,
   } = data;
 
   return (
