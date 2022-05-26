@@ -52,9 +52,9 @@ export default function OrderByBar(props: {
 
   const renderOrder = () =>
     ORDER_BY.map((b) => {
-      let cClass = 'border-secondary rounded-3xl';
+      let cClass = 'border-secondary rounded-3xl mr-2';
       if (value === b.value) {
-        cClass = 'border-secondary rounded-3xl bg-secondary text-white';
+        cClass = 'border-secondary rounded-3xl bg-secondary text-white mr-2';
       }
 
       const handleChange = () => {

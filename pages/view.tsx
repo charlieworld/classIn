@@ -1,4 +1,4 @@
-import { AnimatePresence, motion } from 'framer-motion';
+import { motion } from 'framer-motion';
 
 import MainLayout from '../components/MainLayout';
 import Loading from '../components/Icon/Loading';
@@ -7,6 +7,7 @@ import Card from '../components/Card/Card';
 import IconExclamation from '../components/Icon/Exclamation';
 import OrderByBar from '../components/OrderByBar/OrderByBar';
 import FilterBar from '../components/FilterBar/FilterBar';
+import SearchBar from '../components/FilterBar/SearchBar';
 
 const MESSAGE_CLASS_NAME = 'w-full flex justify-center items-center h-1/2 mt-8';
 
@@ -16,9 +17,11 @@ export default function Index() {
     isLoading,
     isError,
     order,
-    setOrder,
-    handleDisplayData,
+    filter,
+    search,
     handleOrderChange,
+    handleFilterChange,
+    handleSearchChange,
   } = useData();
 
   const renderCards = () => {
@@ -54,17 +57,17 @@ export default function Index() {
     );
   };
 
-  const handleChange = (e) => {
-    handleOrderChange(e);
-  };
+
 
   return (
     <MainLayout>
       <main className="w-full max-w-7xl py-60 px-10 ">
         <div className="fixed z-10 top-16 bg-white w-full left-0 py-4 px-10 shadow-lg flex flex-col items-center	">
-          <FilterBar value={order} onChange={handleChange} />
+          <FilterBar value={filter} onChange={handleFilterChange}>
+            <SearchBar value={search} onChange={handleSearchChange} />
+          </FilterBar>
           <div className="border-b-2 my-2 border-gray-100 w-full" />
-          <OrderByBar value={order} onChange={handleChange} />
+          <OrderByBar value={order} onChange={handleOrderChange} />
         </div>
         {renderCards()}
       </main>

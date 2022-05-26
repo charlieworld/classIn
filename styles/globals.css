@@ -8,3 +8,7 @@
   font-family: 'Noto Sans TC', 'Microsoft JhengHei', '微軟正黑體', sans-serif;
   font-size: 16px;
 }
+
+body {
+  min-height: 105vh;
+}

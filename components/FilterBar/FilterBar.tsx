@@ -1,42 +1,37 @@
 import styled from 'styled-components';
 import Button from '../Button/Button';
-import SearchBar from './SearchBar';
+import { FILTER_VALUE } from '../../hooks/useData';
 
-const SHAPE =
-  'w-full flex items-center place-content-between py-1';
+const SHAPE = 'w-full max-w-6xl flex items-center place-content-between py-1';
 
 const FilterButton = styled(Button)`
   font-weight: bold;
 `;
 
-const ORDER_BY = [
+const FILTER = [
   {
-    text: '推薦高至低',
-    value: 'lv_recommend',
+    text: '所有評價',
+    value: FILTER_VALUE.ALL,
   },
   {
-    text: '作業低至高',
-    value: 'lvWork',
+    text: '人文通識評價',
+    value: FILTER_VALUE.HUMANITIES,
   },
   {
-    text: '考試少至多',
-    value: 'lvExamAmount',
+    text: '自然通識評價',
+    value: FILTER_VALUE.PHYSIC,
   },
   {
-    text: '收穫高至低',
-    value: 'lvLearned',
+    text: '社會通識評價',
+    value: FILTER_VALUE.SOCIAL,
   },
   {
-    text: '有趣高至低',
-    value: 'lvFun',
+    text: '歷史通識評價',
+    value: FILTER_VALUE.HISTORY,
   },
   {
-    text: '要求少至多',
-    value: 'lvRequest',
-  },
-  {
-    text: '時間新至舊',
-    value: 'createDate',
+    text: '體育評價',
+    value: FILTER_VALUE.SPORTS,
   },
 ];
 
@@ -44,14 +39,20 @@ export default function FilterBar(props: {
   className?: string;
   value: string;
   onChange: Function;
+  children: JSX.Element;
 }) {
-  const { className = '', value, onChange } = props;
+  const {
+    className = '',
+    value = '',
+    onChange = () => {},
+    children = null,
+  } = props;
 
-  const renderOrder = () =>
-    ORDER_BY.map((b) => {
-      let cClass = 'border-primary text-primary rounded-md';
+  const renderButtons = () =>
+    FILTER.map((b) => {
+      let cClass = 'border-primary text-primary rounded-md mr-2';
       if (value === b.value) {
-        cClass = 'border-primary rounded-sm bg-primary text-white';
+        cClass = 'border-primary rounded-md bg-primary mr-2 text-white';
       }
 
       const handleChange = () => {
@@ -67,8 +68,8 @@ export default function FilterBar(props: {
 
   return (
     <div className={`${SHAPE} ${className}`}>
-      {renderOrder()}
-      <SearchBar />
+      {renderButtons()}
+      {children}
     </div>
   );
 }

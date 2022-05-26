@@ -12,7 +12,7 @@ export default function SearchBar(props: {
   };
 
   return (
-    <div className={`relative ${className}`}>
+    <div className={`relative ${className} ml-1`}>
       <input
         value={value}
         onChange={handleChange}
