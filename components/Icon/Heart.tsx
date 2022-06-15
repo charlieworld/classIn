@@ -9,7 +9,7 @@ const IconHeartComponent = (props: {
     if (active) return 'text-primary'
     return 'text-gray-200'
   }
-  return <HeartIcon className={`h-6 w-6 ${isActive()} ${customClass}`} />;
+  return <HeartIcon className={`h-4 w-4 md:h-6 md:w-6 ${isActive()} ${customClass}`} />;
 };
 
 export default IconHeartComponent;

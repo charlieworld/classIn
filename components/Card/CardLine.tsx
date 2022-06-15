@@ -5,7 +5,7 @@ export default function CardLine(props: { title: string, children: ReactChildren
   const { title = '', children = null } = props;
 
   return (
-    <div className="flex items-center">
+    <div className="md:flex items-center">
       <SubTitle className="w-24 min-w-fit">{title}</SubTitle>
       {children}
     </div>

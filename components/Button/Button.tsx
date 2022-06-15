@@ -7,7 +7,7 @@ interface ButtonProps {
   onClick?: MouseEventHandler<HTMLButtonElement>;
 }
 
-const BUTTON_SHAPE = 'border-2 px-2 py-1 w-32';
+const BUTTON_SHAPE = 'border-2 px-2 py-1 w-32 text-sm lg:text-base ';
 
 
 export default function ButtonComponent(props: ButtonProps) {

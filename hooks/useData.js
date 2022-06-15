@@ -28,7 +28,6 @@ export default function useData() {
 
   const handleDisplayData = useCallback(() => {
     let tArr = cloneDeep(data.Data);
-    console.log('search:', search);
     if (search && search !== '') {
       const targetIndex = tArr.filter(
         (data) => data.index === parseInt(search)
@@ -36,9 +35,7 @@ export default function useData() {
       if (targetIndex.length > 0) {
         tArr = targetIndex;
       } else {
-        console.log({search});
         tArr = tArr.filter((data) => {
-          console.log('data.teaher', data.teaher);
           if (data.className.indexOf(search) >= 0) return true;
           if (data.teaher.indexOf(search) >= 0) return true;
           return false;

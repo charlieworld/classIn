@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 
 const BREAK_POINT_MOBILE = 768;
+const BREAK_POINT_DESKTOP = 1024;
 
 export default function useViewport() {
   const [width, setWidth] = useState(null);
@@ -17,7 +18,10 @@ export default function useViewport() {
 
       if (wWidth < BREAK_POINT_MOBILE) {
         setViewPort('MOBILE');
-      } else {
+      } else if (wWidth < BREAK_POINT_DESKTOP) {
+        setViewPort('TABLET');
+      }
+      else{
         setViewPort('DESKTOP');
       }
     };

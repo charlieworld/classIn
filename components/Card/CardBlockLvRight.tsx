@@ -20,7 +20,7 @@ export default function CardBlockLvRight(props: CardBlockLvRightProps) {
   } = data;
 
   return (
-    <div className='w-3/12 pr-2'>
+    <div className='w-4/12 lg:w-3/12 pr-2'>
         <Title>{teaher}</Title>
         <CardLine title="講課清晰">
           <IconLine

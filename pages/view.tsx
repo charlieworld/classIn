@@ -61,8 +61,8 @@ export default function Index() {
 
   return (
     <MainLayout>
-      <main className="w-full max-w-7xl py-60 px-10 ">
-        <div className="fixed z-10 top-16 bg-white w-full left-0 py-4 px-10 shadow-lg flex flex-col items-center	">
+      <main className="w-full max-w-7xl py-60 px-10 pt-80 lg:pt-60">
+        <div className="fixed z-10 top-16 bg-white w-full left-0 py-4 px-4 lg:px-10 shadow-lg flex flex-col items-center	">
           <FilterBar value={filter} onChange={handleFilterChange}>
             <SearchBar value={search} onChange={handleSearchChange} />
           </FilterBar>

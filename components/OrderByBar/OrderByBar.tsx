@@ -2,7 +2,7 @@ import styled from 'styled-components';
 import Button from '../Button/Button';
 
 const SHAPE =
-  'w-full max-w-6xl flex items-center place-content-between py-1 bg-green-200';
+  'w-full max-w-6xl lg:flex items-center place-content-between py-1 bg-green-200';
 
 const Title = styled.div`
   font-weight: bold;
@@ -52,9 +52,9 @@ export default function OrderByBar(props: {
 
   const renderOrder = () =>
     ORDER_BY.map((b) => {
-      let cClass = 'border-secondary rounded-3xl mr-2';
+      let cClass = 'border-secondary rounded-3xl mr-2 text-sm lg:text-base mb-2 lg:mb-0';
       if (value === b.value) {
-        cClass = 'border-secondary rounded-3xl bg-secondary text-white mr-2';
+        cClass = 'border-secondary rounded-3xl text-sm lg:text-base bg-secondary text-white mr-2 mb-2 lg:mb-0';
       }
 
       const handleChange = () => {
@@ -74,7 +74,7 @@ export default function OrderByBar(props: {
 
   return (
     <div className={`${SHAPE} ${className}`}>
-      <Title>排序依照：</Title>
+      <Title className="text-base mb-2 lg:mb-0">排序依照：</Title>
       {renderOrder()}
     </div>
   );

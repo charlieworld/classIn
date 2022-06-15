@@ -28,7 +28,7 @@ export default function CardBlockLvLeft(props: CardBlockLvLeftProps) {
   } = data;
 
   return (
-    <div className='w-3/12 pr-2'>
+    <div className='w-5/12 lg:w-3/12 pr-2'>
         <Title>{className}</Title>
         <CardLine title="收穫多少">
           <IconLine
@@ -55,7 +55,7 @@ export default function CardBlockLvLeft(props: CardBlockLvLeftProps) {
           />
         </CardLine>
         {ifOtherWork && ifOtherWork !== '無' ? (
-          <div className="flex items-center">
+          <div className="flex items-center mt-2 md:mt-0 text-sm md:text-base">
             <Tag>{ifOtherWork === '有' ? '有其他作業' : ifOtherWork}</Tag>
           </div>
         ) : null}
@@ -67,7 +67,7 @@ export default function CardBlockLvLeft(props: CardBlockLvLeftProps) {
             iconActive={<Clock active />}
           />
         </CardLine>
-        <div className="flex items-center">
+        <div className="md:flex mt-2 md:mt-0 items-center">
           {ifSmallExam && <Tag className="mr-1">小考</Tag>}
           {ifMidExam && <Tag className="mr-1">期中考</Tag>}
           {ifFinalExam && <Tag className="mr-1">期末考</Tag>}
