@@ -1,12 +1,6 @@
-import styled from 'styled-components';
 import { ReactNode } from 'react';
 import { nanoid } from 'nanoid'
 
-const Wrapper = styled.div`
-  div {
-    margin-right: 0.5rem;
-  }
-`;
 
 interface DotLineProps {
   active: number;
@@ -31,5 +25,5 @@ export default function IconLine(props: DotLineProps) {
     return t;
   };
 
-  return <Wrapper className="flex items-center ">{renderIcons()}</Wrapper>;
+  return <div className="flex items-center mr-1 md:mr-2 mb-1 md:mb-0">{renderIcons()}</div>;
 }

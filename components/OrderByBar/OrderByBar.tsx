@@ -12,7 +12,7 @@ const OrderByButton = styled(Button)`
   font-weight: bold;
 `;
 
-const ORDER_BY = [
+export const ORDER_BY = [
   {
     text: '推薦高至低',
     value: 'lv_recommend',

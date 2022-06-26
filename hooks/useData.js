@@ -3,11 +3,11 @@ import cloneDeep from 'lodash/cloneDeep';
 import useSWR from 'swr';
 import orderBy from 'lodash/orderBy';
 
-const URI = 'https://classin.info/data/data.json';
+import SRC_DATA from '../data/data.json';
 
 const fetcher = (...args) => fetch(...args).then((res) => res.json());
 
-const LIMIT = 10;
+const LIMIT = 20;
 
 export const FILTER_VALUE = {
   HUMANITIES: '人文',
@@ -21,7 +21,7 @@ export const FILTER_VALUE = {
 export default function useData() {
   const [displayData, setDisplayData] = useState(null);
   const [page, setPage] = useState(1);
-  const { data, error } = useSWR(URI, fetcher);
+  const [data] = useState(SRC_DATA);
   const [order, setOrder] = useState('createDate');
   const [filter, setFilter] = useState(FILTER_VALUE.ALL);
   const [search, setSearch] = useState('');
@@ -84,7 +84,7 @@ export default function useData() {
         break;
     }
     setDisplayData(tArr.slice(0, page * LIMIT));
-  }, [data, filter, order, search, setDisplayData]);
+  }, [data, filter, order, search, setDisplayData, page]);
 
   const handleOrderChange = useCallback(
     (newOrder) => {
@@ -110,6 +110,16 @@ export default function useData() {
     [setSearch, handleDisplayData]
   );
 
+  const handlePageChange = useCallback(() => {
+    setPage(page + 1);
+    handleDisplayData();
+  }, [setPage, page, handleDisplayData]);
+
+  const hasMore = useCallback(() => {
+    if (!data) return false;
+    return page < data.Data.length / LIMIT;
+  }, [data, page, LIMIT]);
+
   useEffect(() => {
     if (!data) return;
     if (displayData) return;
@@ -118,11 +128,11 @@ export default function useData() {
 
   return {
     data: displayData,
-    isLoading: !error && !data,
-    isError: error,
+    isLoading: !data,
     order,
     filter,
     search,
+    hasMore,
     setPage,
     setOrder,
     setFilter,
@@ -131,5 +141,6 @@ export default function useData() {
     handleOrderChange,
     handleFilterChange,
     handleSearchChange,
+    handlePageChange,
   };
 }

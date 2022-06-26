@@ -8,7 +8,7 @@ const FilterButton = styled(Button)`
   font-weight: bold;
 `;
 
-const FILTER = [
+export const FILTER = [
   {
     text: '所有評價',
     value: FILTER_VALUE.ALL,
