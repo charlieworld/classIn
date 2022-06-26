@@ -1,7 +1,7 @@
 /* eslint-disable operator-linebreak */
-const fetch = require('node-fetch');
-const fs = require('fs');
-const shell = require('shelljs');
+import fetch from 'node-fetch';
+import fs from 'fs';
+import shell from 'shelljs';
 
 const SHEET_KEY = '1aKaEzOVSxhggU_ydTTvlxGID_rkBPIbS9_WZrQVREpo';
 const API_KEY = 'AIzaSyBkVSguhj9zn8KZ0FmfsDvN9jr4kZhxg54';
