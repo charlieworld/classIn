@@ -22,8 +22,8 @@ const NAV_ITEMS = [
 
 const MobileToolBar = (props: {
   action?: boolean;
-  actionFilter: Function;
-  actionOrder: Function;
+  actionFilter?: Function;
+  actionOrder?: Function;
 }) => {
   const {
     action = false,
