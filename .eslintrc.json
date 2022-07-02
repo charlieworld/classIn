@@ -14,7 +14,7 @@
       "jsx": true
     },
     "ecmaVersion": 2018,
-    "sourceType": "module",
+    "sourceType": "module"
   },
   "plugins": ["react"],
   "rules": {
@@ -23,7 +23,7 @@
   },
   "settings":  {
     "react":  {
-      "version":  "detect",  // Tells eslint-plugin-react to automatically detect the version of React to use
+      "version":  "detect"
     }
   }
 }

@@ -1,3 +1,6 @@
+/* eslint-disable jsx-a11y/anchor-is-valid */
+/* eslint-disable react/require-default-props */
+/* eslint-disable @typescript-eslint/explicit-module-boundary-types */
 import styled from 'styled-components';
 import Image from 'next/image';
 import Link from 'next/link';

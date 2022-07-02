@@ -1,13 +1,13 @@
-import { useRouter } from 'next/router'
+import { useRouter } from 'next/router';
 import Button from '../Button/Button';
 
-
 const BUTTON_STYLE = 'ml-6 text-white border-white rounded-3xl';
-const BUTTON_ACTIVE_STYLE = 'ml-6 text-primary bg-white border-white rounded-3xl';
+const BUTTON_ACTIVE_STYLE =
+  'ml-6 text-primary bg-white border-white rounded-3xl';
 const BUTTON_HOVER_STYLE = [
   'border-primary-dark',
   'bg-primary-dark',
-  'text-white'
+  'text-white',
 ];
 
 const NAV_ITEMS = [
@@ -24,7 +24,7 @@ const NAV_ITEMS = [
 ];
 
 export default function HeaderNavComponent() {
-  const router = useRouter()
+  const router = useRouter();
 
   const renderItems = () => NAV_ITEMS.map((item) => {
     const handleOnClick = () => {
@@ -36,23 +36,19 @@ export default function HeaderNavComponent() {
     const renderClassName = () => {
       if (isActive()) return BUTTON_ACTIVE_STYLE;
       return BUTTON_STYLE;
-    }
+    };
 
     return (
-      <Button 
+      <Button
         key={item.id}
-        customClass={renderClassName()} 
+        customClass={renderClassName()}
         hoverStyle={BUTTON_HOVER_STYLE}
         onClick={handleOnClick}
       >
         {item.text}
       </Button>
-    )
+    );
   });
 
-  return (
-    <nav className='flex'>
-      {renderItems()}
-    </nav>
-  );
+  return <nav className="flex">{renderItems()}</nav>;
 }
