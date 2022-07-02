@@ -6,9 +6,10 @@
   "extends": [
     "plugin:react/recommended",
     "plugin:@typescript-eslint/recommended",
-    "airbnb"
-    ],
-  "parser": "@typescript-eslint/parser",  
+    "airbnb",
+    "next"
+  ],
+  "parser": "@typescript-eslint/parser",
   "parserOptions": {
     "ecmaFeatures": {
       "jsx": true
@@ -21,9 +22,15 @@
     "react/jsx-filename-extension": "off",
     "react/react-in-jsx-scope": "off"
   },
-  "settings":  {
-    "react":  {
-      "version":  "detect"
+  "settings": {
+    "react": {
+      "version": "detect"
+    },
+    "import/resolver": {
+      "node": {
+        "extensions": [".ts", ".tsx"],
+        "moduleDirectory": ["src", "node_modules"]
+      }
     }
   }
 }

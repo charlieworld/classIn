@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/explicit-module-boundary-types */
 /* eslint-disable react/jsx-props-no-spreading */
 /* eslint-disable implicit-arrow-linebreak */
 import Document from 'next/document';
