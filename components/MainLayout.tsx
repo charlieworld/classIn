@@ -1,4 +1,7 @@
 import { ReactChildren, ReactChild } from 'react';
+import Script from 'next/script'
+
+
 import Head from 'next/head';
 import Header from './Header/Header';
 import Footer from './Footer';
@@ -8,6 +11,17 @@ export default function MainLayout(props: { className?: string, children: ReactC
 
   return (
     <div id="main" className="text-gray-600 font-sans leading-7 tracking-wider pm-20">
+      <Script id="google-analytics" strategy="afterInteractive">
+        {`
+          (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+          (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+          m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+          })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+          ga('create', 'UA-125886689-1', 'auto');
+          ga('send', 'pageview');
+        `}
+      </Script>
       <Head>
         <title>ClassIn | 專屬輔大人的修課經驗交流平台</title>
         <meta httpEquiv="pragma" content="no-cache"></meta>
