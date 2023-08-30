@@ -10,7 +10,7 @@ const BUTTON_HOVER_STYLE = [
   'text-white',
 ];
 
-const NAV_ITEMS = [
+export const NAV_ITEMS = [
   {
     id: 'view',
     text: '查看評價',

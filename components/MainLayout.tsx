@@ -1,16 +1,23 @@
 import { ReactChildren, ReactChild } from 'react';
-import Script from 'next/script'
 
+import Script from 'next/script';
 
 import Head from 'next/head';
 import Header from './Header/Header';
 import Footer from './Footer';
 
-export default function MainLayout(props: { className?: string, children: ReactChildren | ReactChild }) {
+
+export default function MainLayout(props: {
+  className?: string;
+  children: ReactChildren | ReactChild;
+}) {
   const { className = '', children } = props;
 
   return (
-    <div id="main" className="text-gray-600 font-sans leading-7 tracking-wider pm-20">
+    <div
+      id="main"
+      className="text-gray-600 font-sans leading-7 tracking-wider pm-20"
+    >
       <Script id="google-analytics" strategy="afterInteractive">
         {`
           (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
@@ -47,9 +54,7 @@ export default function MainLayout(props: { className?: string, children: ReactC
         <meta property="og:site_name" content="ClassIn" />
       </Head>
       <Header className={className} />
-      <div className='flex justify-center'>
-        {children}
-      </div>
+      <div className="flex justify-center">{children}</div>
       <Footer />
     </div>
   );

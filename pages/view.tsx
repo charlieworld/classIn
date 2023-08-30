@@ -4,7 +4,6 @@ import MainLayout from '../components/MainLayout';
 import Loading from '../components/Icon/Loading';
 import useData from '../hooks/useData';
 import Card from '../components/Card/Card';
-import IconExclamation from '../components/Icon/Exclamation';
 import OrderByBar from '../components/OrderByBar/OrderByBar';
 import FilterBar from '../components/FilterBar/FilterBar';
 import SearchBar from '../components/FilterBar/SearchBar';
