@@ -48,7 +48,7 @@ export default function MainLayout(props: {
           property="og:description"
           content="專屬輔大學生的修課評價網站，來看看學長姐們對於不同課程的評價、也分享你這學期所修的課吧！"
         />
-        <meta property="og:image" content="./asset/og_cover.jpg" />
+        <meta property="og:image" content="https://classin.info/og_cover.jpg" />
         <meta property="og:url" content="https://classin.info" />
         <meta property="og:type" content="website" />
         <meta property="og:site_name" content="ClassIn" />
