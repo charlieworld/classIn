@@ -16,7 +16,7 @@ export default function Index() {
   const renderMobileMenu = () => {
     if (viewPort != 'MOBILE') return null;
     return (
-      <div className="fixed top-16 p-4 w-full flex justify-center border-b-2 border-primary">
+      <div className="fixed top-16 p-4 w-full flex justify-center border-b-2 border-primary bg-white">
         {NAV_ITEMS.map((item) => {
           const handleOnClick = () => {
             router.push(item.link);
