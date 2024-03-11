@@ -43,17 +43,13 @@ const MobileToolBar = (props: {
       icon: <SelectorIcon />,
       action: actionOrder,
     },
-    {
-      id: 'search',
-      icon: <SearchIcon />,
-      action: '/add',
-    },
   ];
 
   const renderItems = (items) =>
     items.map((item) => {
       const handleOnClick = () => {
-        if (typeof action === 'string') {
+        console.log('action: ', item.action);
+        if (typeof item.action === 'string') {
           router.push(item.action);
         } else {
           item.action();
