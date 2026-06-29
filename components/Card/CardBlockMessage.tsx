@@ -12,6 +12,8 @@ export default function CardBlockMessage(props: CardBlockMessageProps) {
 
   const { lv_recommend, createDate, message } = data;
 
+  console.log('CardBlockMessage', message);
+
   return (
     <div className="lg:w-4/12">
       <div className="flex items-center justify-between w-full">

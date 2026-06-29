@@ -2,7 +2,6 @@
 /* eslint-disable react/require-default-props */
 /* eslint-disable @typescript-eslint/explicit-module-boundary-types */
 import styled from 'styled-components';
-import Image from 'next/image';
 import Link from 'next/link';
 import HeaderNav from './HeaderNav';
 import useViewport from '../../hooks/useViewport';
@@ -20,6 +19,14 @@ const ImageWrapper = styled.div`
   width: 100%;
   position: relative;
 `;
+const Logo = styled.img`
+  position: absolute;
+  inset: 0;
+  height: 100%;
+  width: 100%;
+  object-fit: contain;
+  object-position: left center;
+`;
 
 export default function HeaderComponent(props: { className?: string}) {
   const { className = '' } = props;
@@ -29,7 +36,7 @@ export default function HeaderComponent(props: { className?: string}) {
       <ImageWrapper>
         <Link href="/" passHref>
           <a>
-            <Image priority src="/logo_header.svg" layout="fill" />
+            <Logo src="/logo_header.svg" alt="classIn" />
           </a>
         </Link>
       </ImageWrapper>

@@ -1,0 +1,53 @@
+name: Deploy to GitHub Pages
+
+on:
+  push:
+    branches: [master]
+  workflow_dispatch:
+  workflow_call: # allow other workflows (e.g. update-data) to trigger a deploy
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+# Only one Pages deployment at a time; don't cancel an in-progress one.
+concurrency:
+  group: pages
+  cancel-in-progress: false
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          # Always build the current tip of master (picks up fresh data commits).
+          ref: master
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 16 # Next 12.1.4 needs Node <17 (OpenSSL 1.1.1)
+          cache: yarn
+
+      - run: yarn install --frozen-lockfile
+
+      # `next build && next export` -> static site in ./out
+      - run: yarn export
+
+      # Stop GitHub Pages' Jekyll from dropping the _next/ directory.
+      - run: touch out/.nojekyll
+
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: out
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - id: deployment
+        uses: actions/deploy-pages@v4
